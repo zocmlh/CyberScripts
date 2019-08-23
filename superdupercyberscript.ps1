@@ -28,3 +28,13 @@ net accounts /lockoutwindow:10
 reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "DisableCAD" /t REG_DWORD /d 0 /f
 ##Firewall
 NetSh Advfirewall set allprofiles state on
+##Updates
+Get-WUInstall -KBArticleID KB4489873,KB4489883 –AcceptAll
+
+##Services
+Set-Service Telnet -StartupType Disabled
+Set-Service IIS -StartupType Disabled
+Set-Service "Web Services" -StartupType Disabled
+Set-Service FTP -StartupType Disabled
+echo "Object not found means it has been disabled"
+pause
