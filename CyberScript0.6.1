@@ -1,0 +1,191 @@
+#REM This is the current version that is used in the official .EXE file on google Drive. (This is not ready for direct conversion)
+#Created for command line, not powershell
+
+@echo off
+color 0a
+title Cyber Script Beta v0.6.1
+mode con:cols=1080 lines=1920
+:Menu
+cls
+echo =======================================================================================================
+.
+echo                            W E L C O M E   T O  T H E  C Y B E R S C R I P T                        
+echo.
+echo                                     B E T A   V E R S I O N  0. 6 .1                                       
+echo.
+echo.=======================================================================================================
+
+echo=======================================================================================================
+echo.
+echo                       S E L E C T   A N   O P T I O N   T O   C O N T I N U E                     
+echo.
+echo.
+=======================================================================================================
+Echo (1) to edit or run password settings. Enter (2) to run Control Panel settings Enter (3) to go to credits
+
+set /p input=Enter Here:echo
+
+if %input%==1 goto Password
+if %input%==2 goto Control
+if %input%==3 goto Credits
+
+pause
+goto Next
+
+:Password
+cls
+echo =======================================================================================================
+echo.
+echo                        P L E A S E   S E L E C T   A N   O P T I O N   F R O M                     
+echo.
+echo                                              B E L O W                                            
+echo.
+echo
+=======================================================================================================
+echo Enter (1) to edit Password Policies, or (2) to Exit
+
+set /p PasswordInput=Enter Here: 
+if %PasswordInput%==1 goto PassPolicies
+if %PasswordInput%==asf goto Secpol
+if %PasswordInput%==asdf goto PRun
+if %PasswordInput%==2 goto Menu
+pause
+goto Password
+
+
+:Secpol
+cls
+echo Continue To Open Secpol
+pause
+start secpol.msc /wait
+goto Password
+
+:PassPolicies
+cls
+echo Running...
+net accounts /MINPWLEN:8
+net accounts /MAXPWAGE:42
+net accounts /MINPWAGE:3
+net accounts /lockoutduration:30
+net accounts /lockoutthreshold:5
+net accounts /lockoutwindow:10
+reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "DisableCAD" /t REG_DWORD /d 0 /f
+ping localhost -n 3 >nul
+cls
+echo Success! Password Settings Changed!
+echo Complexity cannot be changed through this script so make sure to enable that manually!
+pause
+goto Menu
+
+
+:Control
+cls
+echo =======================================================================================================
+echo.
+echo                        P L E A S E   S E L E C T   A N   O P T I O N   F R O M                     
+echo.
+echo                                              B E L O W                                            
+echo.
+echo =======================================================================================================
+echo Enter (1) For Windows Updater, (2) For User Account Settings, (3) For Services, (4) For Firewall, or (5) To Exit.
+set /p ControlInput=Enter Here:
+if %ControlInput%==1 goto WinUpdate
+if %ControlInput%==2 goto UsrAccounts
+if %ControlInput%==3 goto Services
+if %ControlInput%==4 goto Firewall
+if %ControlInput%==5 goto Menu
+pause
+goto Menu
+
+:WinUpdate
+cls
+echo Continue To Open Windows Updater.
+pause
+start control /name Microsoft.WindowsUpdate
+goto Control
+
+:UsrAccounts
+cls
+echo (1) to delete users, (2) to demote, (3) to promote, or (4) to exit
+
+set /p usrAccounts=Enter Here:
+if %usrAccounts%==1 goto delete
+if %usrAccounts%==2 goto demote
+if %usrAccounts%==3 goto promote
+if %usrAccounts%==4 goto Menu
+pause
+
+
+
+:delete
+net user
+echo If you wish to exit type exit
+echo To continue, type C
+set /p exit=Enter Here:
+if %exit%==exit goto Menu
+if %exit%==C goto nextLine
+
+:nextLine
+echo Please review the users and determine the unauthorised users
+echo When ready type the names of the users to be deleted, one by one in the box below
+pause
+set /p deleteUser=Enter Here:
+net user %deleteUser% /delete
+pause
+goto UsrAccounts
+
+:demote
+cls
+net localgroup administrators
+echo Please review the administrators in the readme and compare them to here, enter when ready
+pause
+echo Type the name of the user you want to demote or type exit to go back
+
+set /p demoteuser=Enter Here:
+if %demoteuser%==exit goto Menu
+pause 
+net localgroup Administrators %demoteuser% /delete  
+echo Success!
+pause 
+goto demote
+
+:promote
+cls 
+net localgroup administrators
+echo If there is a user that is supposed to be admin but is not listed, type their name next.
+pause
+echo Type their name below, type exit to exit
+set /p promoteuser=Enter Here:
+if %promoteuser%==exit goto Menu
+net localgroup administrators %promoteuser% /add
+echo Success!
+pause
+goto Menu
+
+
+:Services
+cls
+echo Continue To Open Services.
+pause
+start services.msc
+goto Control
+
+:Firewall
+NetSh Advfirewall set allprofiles state on
+echo Success 
+goto Menu
+
+
+
+
+
+
+:Credits
+cls
+echo                                                Made By Elijah, Brennan and Dominic
+echo							                                                        
+echo                                          Script Made To Better Optimise Windows For Security                               
+echo                                                                         
+pause
+goto Menu
+exit
