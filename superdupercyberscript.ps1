@@ -55,4 +55,6 @@ Set-Service "Clipbook" -StartupType Disabled
 
 echo "Do not worry. Object not found means it has been disabled already!"
 pause
+##Firewall
+#NetSh Advfirewall set allprofiles state on
 
