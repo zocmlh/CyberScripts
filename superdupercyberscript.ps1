@@ -35,6 +35,24 @@ Get-WUInstall -KBArticleID KB4489873,KB4489883 –AcceptAll
 Set-Service Telnet -StartupType Disabled
 Set-Service IIS -StartupType Disabled
 Set-Service "Web Services" -StartupType Disabled
-Set-Service FTP -StartupType Disabled
-echo "Object not found means it has been disabled"
+Set-Service "Xbox Live Game Save" -StartupType Disabled
+Set-Service "Xbox Live Auth Manager" -StartupType Disabled
+Set-Service "AllJoyn Router Service" -StartupType Disabled
+Set-Service "Bluetooth Support Service" -StartupType Disabled
+Set-Service "Geolocation Service" -StartupType Disabled
+Set-Service "Phone Service" -StartupType Disabled
+Set-Service "Touch Keyboard and Handwriting Panel Service" -StartupType Disabled
+Set-Service "Windows Biometric Service" -StartupType Disabled
+Set-Service "Windows Mobile Hotspot Service" -StartupType Disabled
+Set-Service "Adobe Acrobat Update Services" -StartupType Disabled
+Set-Service "Downloaded Maps Manager" -StartupType Disabled
+Set-Service "Internet Explorer ETW Collecter Service" -StartupType Disabled
+Set-Service "Print Spooler" -StartupType Disabled
+Set-Service "Skype Updater" -StartupType Disabled
+Set-Service "IIS Admin Servicee" -StartupType Disabled
+Set-Service "Computer Browser" -StartupType Disabled
+Set-Service "Clipbook" -StartupType Disabled
+
+echo "Do not worry. Object not found means it has been disabled already!"
 pause
+
