@@ -6,3 +6,6 @@ create a text document on desktop with the name "users" and one with the name "a
 
 Block ports:
 New-NetFirewallRule -DisplayName "Block Outbound Port <0>" -Direction Outbound -LocalPort <0> -Protocol TCP -Action Block
+
+Get Ports:
+Get-NetTCPConnection
