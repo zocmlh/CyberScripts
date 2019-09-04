@@ -25,8 +25,8 @@ net accounts /lockoutwindow:10
 #Firewall
 reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "DisableCAD" /t REG_DWORD /d 0 /f
 NetSh Advfirewall set allprofiles state on
-##Updates
-Get-WUInstall -KBArticleID KB4489873,KB4489883 –AcceptAll
+##Updates not working
+#Get-WUInstall -KBArticleID KB4489873,KB4489883 –AcceptAll
 
 ##Services
 
@@ -47,17 +47,10 @@ $users = Import-Csv -Path D:\ser.csv
 #Remove Users
 pause
 echo "Continue only if you have completed the Forensic Questions" 
-net user administrator /active:no | out-null
-net user guest /active:no | out-null
+net user administrator /active:no | out
+net user guest /active:no | out
 
-#Set passwords for all accounts
-$password = Get-WmiObject -class win32_useraccount -filter "LocalAccount='True'"
-  foreach ($password in $password) {
-    net user $password.Name BananaC@ctus01  /passwordreq:yes /logonpasswordchg:yes | out-null }
-        wmic UserAccount set PasswordExpires=True | out-null
-        wmic UserAccount set Lockout=False | out-null
-
-
+#Account Management
 do {
     $user = Read-host -Prompt "Should a user be removed? Y/N"
    if ($user -eq "Y") {
@@ -97,3 +90,9 @@ do {
    net user
    } while ($promoteuser -eq "Y")
 
+#Set passwords for all accounts
+$password = Get-WmiObject -class win32_useraccount -filter "LocalAccount='True'"
+  foreach ($password in $password) {
+    net user $password.Name BananaC@ctus01  /passwordreq:yes /logonpasswordchg:yes | out-null }
+        wmic UserAccount set PasswordExpires=True | out-null
+        wmic UserAccount set Lockout=False | out-null
