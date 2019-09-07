@@ -33,24 +33,19 @@ NetSh Advfirewall set allprofiles state on
 pause
 ##Firewall
 NetSh Advfirewall set allprofiles state on
-
-#Passwords
-Import-Module ActiveDirectory
-
-# Set the default password
-
  
-# Get the list of accounts from the file on file
-# List the user names one per line
-$users = Import-Csv -Path D:\ser.csv
 
 #Remove Users
 pause
 echo "Continue only if you have completed the Forensic Questions" 
-net user administrator /active:no | out
-net user guest /active:no | out
+net user administrator /active:no 
+net user guest /active:no 
+
 
 #Account Management
+
+get-localuser
+pause
 do {
     $user = Read-host -Prompt "Should a user be removed? Y/N"
    if ($user -eq "Y") {
@@ -95,4 +90,4 @@ $password = Get-WmiObject -class win32_useraccount -filter "LocalAccount='True'"
   foreach ($password in $password) {
     net user $password.Name BananaC@ctus01  /passwordreq:yes /logonpasswordchg:yes | out-null }
         wmic UserAccount set PasswordExpires=True | out-null
-        wmic UserAccount set Lockout=False | out-null
+wmic UserAccount set Lockout=False | out-null
