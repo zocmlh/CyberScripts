@@ -13,8 +13,14 @@ echo "==========================================================================
                                  (tylerkhooang for roen)                             
 ======================================================================================================="
 Start-Sleep 5 
-##Account Management
 
+#Updates
+Install-Module PSWindowsUpdate
+Get-Command –module PSWindowsUpdate
+Add-WUServiceManager -ServiceID 7971f918-a847-4430-9279-4a52d1efe18d
+Get-WUInstall –MicrosoftUpdate –AcceptAll
+
+##Account Management
 net accounts /MINPWLEN:8
 net accounts /MAXPWAGE:42
 net accounts /MINPWAGE:3
@@ -25,10 +31,6 @@ net accounts /lockoutwindow:10
 #Firewall
 reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "DisableCAD" /t REG_DWORD /d 0 /f
 NetSh Advfirewall set allprofiles state on
-##Updates not working
-#Get-WUInstall -KBArticleID KB4489873,KB4489883 –AcceptAll
-
-##Services
 
 pause
 ##Firewall
