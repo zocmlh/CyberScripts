@@ -106,3 +106,87 @@ do {
    else {break}
    } while ($service -eq "Y")
    
+#Auditing
+function Set-RegistryValue
+{
+    $Parameters = @{
+        Path        = $Registry.Path
+        Name        = $Registry.ValueName
+        ErrorAction = 'SilentlyContinue'
+    }
+ 
+    Get-ItemProperty @Parameters
+ 
+    Remove-ItemProperty @Parameters
+ 
+    $Parameters.Remove('ErrorAction')
+    $Parameters.Add('Value', $Registry.ValueData)
+    $Parameters.Add('PropertyType', $Registry.ValueType)
+ 
+    New-ItemProperty @Parameters
+}
+ 
+#region Add access for Administrators
+$RegistrySubKey = 'SECURITY'
+ 
+$RegistryKeyControl = [Microsoft.Win32.Registry]::
+LocalMachine.OpenSubKey(
+$RegistrySubKey,
+[Microsoft.Win32.RegistryKeyPermissionCheck]::ReadWriteSubTree,
+[System.Security.AccessControl.RegistryRights]::ChangePermissions
+)
+ 
+$AccessControlList = $RegistryKeyControl.GetAccessControl()
+$BackupOfAccessControlList = $RegistryKeyControl.GetAccessControl()
+ 
+$Account = [System.Security.Principal.NTAccount]'BUILTIN\Administrators'
+$Permissions = [System.Security.AccessControl.RegistryRights]'FullControl'
+$InheritanceFlag = [System.Security.AccessControl.InheritanceFlags]'ContainerInherit,ObjectInherit'
+$PropagationFlag = [System.Security.AccessControl.PropagationFlags]'None'
+$AccessType = [System.Security.AccessControl.AccessControlType]'Allow'
+ 
+$AccessRule = New-Object System.Security.AccessControl.RegistryAccessRule(
+$Account,
+$Permissions,
+$InheritanceFlag,
+$PropagationFlag,
+$AccessType
+)
+ 
+$AccessControlList.AddAccessRule($AccessRule)
+ 
+$RegistryKeyControl.SetAccessControl($AccessControlList)
+#endregion
+ 
+#region set audit values
+#Advanced Audit Policy Configuration
+#https://countuponsecurity.com/tag/poladtev
+#https://www.kazamiya.net/files/PolAdtEv_Structure_en_rev2.pdf
+$Registry = @{
+Path = 'HKLM:\Security\Policy\PolAdtEv'
+ValueName = '(default)'
+ValueData = [byte[]] @(
+0, 1, 0, 0, 9, 0, 0, 0, 128, 0, 0, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3,
+0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3,
+0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3,
+0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3,
+0, 3, 0, 0, 0, 5, 0, 10, 0, 14, 0, 3, 0, 5, 0, 6, 0, 6, 0, 4, 0, 4, 0
+)
+ValueType = 'None'
+}
+ 
+Set-RegistryValue
+ 
+#Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings ==&gt; Enabled
+#https://technet.microsoft.com/en-us/library/jj852246(v=ws.11).aspx
+$Registry.Path = 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+$Registry.ValueName = 'SCENoApplyLegacyAuditPolicy'
+$Registry.ValueData = 1
+$Registry.ValueType = 'DWord'
+ 
+Set-RegistryValue
+#endregion
+ 
+#region Remove access for Administrators
+$RegistryKeyControl.SetAccessControl($BackupOfAccessControlList)
+#endregion
