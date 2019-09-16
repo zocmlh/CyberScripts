@@ -91,3 +91,16 @@ $password = Get-WmiObject -class win32_useraccount -filter "LocalAccount='True'"
     net user $password.Name BananaC@ctus01  /passwordreq:yes /logonpasswordchg:yes | out-null }
         wmic UserAccount set PasswordExpires=True | out-null
 wmic UserAccount set Lockout=False | out-null
+
+pause
+#Services
+sc query type= service > "%userprofile%\Desktop\ServicesList.txt"
+echo "Go over and look for malicous services"
+do {
+    $service = Read-host -Prompt "Should a service be stopped? Y/N"
+   if ($service -eq "Y") {
+      $services = Read-host -Prompt "What service? (case senstitive btw)"
+        stop-service $services
+   else {break}
+   } while ($service -eq "Y")
+   
