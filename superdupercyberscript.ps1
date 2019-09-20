@@ -14,6 +14,9 @@ echo "==========================================================================
 ======================================================================================================="
 Start-Sleep 5 
 
+#Firefox Updater
+PS> Start-BitsTransfer –Source  'https://www.mozilla.org/en-US/firefox/download/'  -Destination 'C:\Firefox.exe'
+
 #Updates
 Install-Module PSWindowsUpdate
 Get-Command –module PSWindowsUpdate
