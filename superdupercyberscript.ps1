@@ -15,6 +15,8 @@ Start-Sleep 5
 
 #Firefox Updater
 
+
+
 #Updates
 Install-Module PSWindowsUpdate
 Get-Command –module PSWindowsUpdate
@@ -114,3 +116,6 @@ $app = Get-WmiObject -Class Win32_Product | Where-Object {
 }
 
 $app.Uninstall()
+
+
+
