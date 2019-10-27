@@ -98,24 +98,30 @@ $password = Get-WmiObject -class win32_useraccount -filter "LocalAccount='True'"
 wmic UserAccount set Lockout=False | out-null
 
 pause
+
+#Check intalled programs
+Function Check-InstalledSoftware ($display_name) {
+    Return Get-ItemProperty $registry_paths -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -like $display_name }
+} # function
+
 #Services
-sc query type= service > "%userprofile%\Desktop\ServicesList.txt"
-echo "Go over and look for malicous services"
-do {
-    $service = Read-host -Prompt "Should a service be stopped? Y/N"
-   if ($service -eq "Y") {
-      $services = Read-host -Prompt "What service? (case senstitive btw)"
-        stop-service $services
-   else {break}
-   } while ($service -eq "Y")
+#sc query type= service > "%userprofile%\Desktop\ServicesList.txt"
+#echo "Go over and look for malicous services"
+#do {
+#    $service = Read-host -Prompt "Should a service be stopped? Y/N"
+#   if ($service -eq "Y") {
+#      $services = Read-host -Prompt "What service? (case senstitive btw)"
+#        stop-service $services
+#   else {break}
+#   } while ($service -eq "Y")
    
 #Programs
-Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table –AutoSize
-$app = Get-WmiObject -Class Win32_Product | Where-Object { 
-    $_.Name -match "Software Name" 
-}
+#Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table –AutoSize
+#$app = Get-WmiObject -Class Win32_Product | Where-Object { 
+#    $_.Name -match "Software Name" 
+#}
 
-$app.Uninstall()
+#$app.Uninstall()
 
 
 
