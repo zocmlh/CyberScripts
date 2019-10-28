@@ -4,6 +4,8 @@ Invoke-Command –Computername “server1”, “Server2” –ScriptBlock {Set-
 #List all installed software
 Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table –AutoSize > C:\Users\bwayne\Desktop\Programs.txt
 
+
+#Services
 Set-Service RemoteRegistry -StartupType Disabled
 Set-Service RemoteAccess -StartupType Disabled
 Set-Service Telnet -StartupType Disabled
@@ -14,4 +16,11 @@ Set-Service ServiceName -StartupType Disabled
 Set-Service ServiceName -StartupType Disabled
 Set-Service ServiceName -StartupType Disabled
 Set-Service ServiceName -StartupType Disabled
+
+#Enable Scanning USB sticks
+Set-MpPreference -DisableRemovableDriveScanning $false
+
+#Turn on Windows Defender
+Set-MpPreference -PUAProtection 1
+
 
