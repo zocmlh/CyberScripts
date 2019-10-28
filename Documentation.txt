@@ -14,7 +14,7 @@ Things to add:
   Never allow sites to see your location
   Pop-up blocker
   Disable services:
-    IIS
+    ~IIS
     NetMeeting Remote Desktop Sharing – VoIP
     Remote Desktop Help Session Manager
     ~Remote Registry
@@ -26,6 +26,7 @@ Things to add:
     Universal Plug and Play Device Host
     & others
   ~Turn off remote settings
-  Turn Event Viewer on 
+  Turn Event Viewer on
+  ~Windows Defender
    
   
