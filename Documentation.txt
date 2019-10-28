@@ -1,0 +1,31 @@
+Things to add:
+  
+  Dowload Updates
+  Auditing
+  Enable System and Event logging
+  Update Applications
+    ex: java, firefox, oracle, adobe, Sql_server
+  Enable UAC
+  Remove Guest and Admin accounts
+  List all installed software
+  Pardon main account from password change 
+  Turn Remote Desktop off
+  Block cookies
+  Never allow sites to see your location
+  Pop-up blocker
+  Disable services:
+    IIS
+    NetMeeting Remote Desktop Sharing – VoIP
+    Remote Desktop Help Session Manager
+    Remote Registry
+    Routing and Remote Access
+    Simple File Sharing
+    SSD Discovery Service
+    Telnet
+    FTP
+    Universal Plug and Play Device Host
+    Windows Messenger Service
+    & others
+   Turn off remote settings
+   
+  
