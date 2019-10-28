@@ -11,7 +11,7 @@ Set-Service RemoteAccess -StartupType Disabled
 Set-Service Telnet -StartupType Disabled
 Set-Service FTP -StartupType Disabled
 Set-Service IIS -StartupType Disabled
-Set-Service ServiceName -StartupType Disabled
+Set-Service W3SVC -StartupType Disabled
 Set-Service ServiceName -StartupType Disabled
 Set-Service ServiceName -StartupType Disabled
 Set-Service ServiceName -StartupType Disabled
