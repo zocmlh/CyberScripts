@@ -26,6 +26,7 @@ Things to add:
     Universal Plug and Play Device Host
     Windows Messenger Service
     & others
-   Turn off remote settings
+  Turn off remote settings
+  Turn Event Viewer on 
    
   
