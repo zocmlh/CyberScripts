@@ -24,3 +24,7 @@ Set-MpPreference -DisableRemovableDriveScanning $false
 Set-MpPreference -PUAProtection 1
 
 
+#Windows Updates
+Dism.exe /online /Cleanup-Image /StartComponentCleanup
+
+Dism.exe /online /Cleanup-Image /SPSuperseded /StartComponentCleanup
