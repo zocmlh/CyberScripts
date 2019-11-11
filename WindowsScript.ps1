@@ -114,8 +114,36 @@ do {
         stop-service $services
    else {break}
    } while ($service -eq "Y")
-   
+  
+#Programs
+do {
+$DeleteProg = Read-Host -Prompt "Should a program be deleted? Y/N"
+    if ($DeleteProg -eq "Y") {
+        $Programs
+        $DelProg = Read-Host -Prompt "What program?"
+            Remove-Item "C:\Program Files\$DelProg" -Recurse -ErrorAction SilentlyContinue | out-null 
+            Remove-Item "C:\Program Files (x86)\$DelProg" -Recurse -ErrorAction SilentlyContinue | out-null 
+            Remove-Item "C:\Program Data\$DelProg" -Recurse -ErrorAction SilentlyContinue | out-null }
+    else {break}
+    } while ($DeleteProg -eq "Y")
 
+#Turn on automatic updates
+$AutoUpdate = (New-Object -com "Microsoft.Update.AutoUpdate").Settings
+$AutoUpdate.NotificationLevel = 4
+$AutoUpdate.Save()
+
+#Disable remote desktop
+Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 1 | out-null
+
+#Auditing
+auditpol.exe /set /category:* /success:enable | out-null
+auditpol.exe /set /category:* /failure:enable | out-null
+
+#Disabling Services 
+$BadService = @("tapisrv","bthserv","mcx2svc","remoteregistry","seclogon","telnet","tlntsvr","p2pimsvc","simptcp","fax","msftpsvc","cscservice","fax","msftpsvc","webclient")
+foreach($BadService in $DisableServices){
+Stop-Service $BadService -Force -ErrorAction SilentlyContinue | out-null
+Set-Service $BadService -StartupType Disabled -ErrorAction SilentlyContinue | out-null}
 
 
 
