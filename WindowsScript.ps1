@@ -103,17 +103,6 @@ pause
 Function Check-InstalledSoftware ($display_name) {
     Return Get-ItemProperty $registry_paths -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -like $display_name }
 } # function
-
-#Services
-(wmic service get  name, startname /format:htable >out.html) && out.html
-echo "Go over and look for malicous services"
-do {
-   $service = Read-host -Prompt "Should a service be stopped? Y/N"
-   if ($service -eq "Y") {
-      $services = Read-host -Prompt "What service? (case senstitive btw)"
-        stop-service $services
-   else {break}
-   } while ($service -eq "Y")
   
 #Programs
 do {
