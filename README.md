@@ -14,5 +14,3 @@ New-NetFirewallRule -DisplayName "Block Outbound Port <0>" -Direction Outbound -
 Get Ports:
 Get-NetTCPConnection
 
-Enable Scripting:
-set-executionpolicy remotesigned
