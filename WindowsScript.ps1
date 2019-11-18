@@ -27,9 +27,11 @@ Get-WUInstall –MicrosoftUpdate –AcceptAll
 net accounts /MINPWLEN:8
 net accounts /MAXPWAGE:42
 net accounts /MINPWAGE:10
+net accounts /UNIQUEPW:4
 net accounts /lockoutduration:30
 net accounts /lockoutthreshold:5
 net accounts /lockoutwindow:10
+
 
 #Firewall
 reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "DisableCAD" /t REG_DWORD /d 0 /f
