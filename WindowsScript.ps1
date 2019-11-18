@@ -26,7 +26,7 @@ Get-WUInstall –MicrosoftUpdate –AcceptAll
 ##Account Management
 net accounts /MINPWLEN:8
 net accounts /MAXPWAGE:42
-net accounts /MINPWAGE:3
+net accounts /MINPWAGE:10
 net accounts /lockoutduration:30
 net accounts /lockoutthreshold:5
 net accounts /lockoutwindow:10
@@ -91,6 +91,8 @@ do {
    } while ($promoteuser -eq "Y")
 
 #Set passwords for all accounts
+
+
 $password = Get-WmiObject -class win32_useraccount -filter "LocalAccount='True'"
   foreach ($password in $password) {
     net user $password.Name BananaC@ctus01  /passwordreq:yes /logonpasswordchg:yes | out-null }
