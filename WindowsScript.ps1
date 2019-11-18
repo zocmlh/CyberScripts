@@ -32,6 +32,8 @@ net accounts /lockoutduration:30
 net accounts /lockoutthreshold:5
 net accounts /lockoutwindow:10
 
+#Event Logging
+sc config eventlog start= auto
 
 #Firewall
 reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "DisableCAD" /t REG_DWORD /d 0 /f
@@ -50,7 +52,10 @@ net user guest /active:no
 
 
 #Account Management
+ #Do not display last username
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "DisableCAD" /t REG_DWORD /d 1 /f
 
+ #Remove/Add Users
 get-localuser
 pause
 do {
@@ -71,7 +76,7 @@ do {
    else {break}
    net user
     } while ($new -eq "Y")
-#Demote and Promote users
+ #Demote and Promote users
 do {
     $demote = Read-host -Prompt "Should a user be demoted? Y/N"
    if ($demote -eq "Y") {
@@ -133,7 +138,7 @@ auditpol.exe /set /category:* /success:enable | out-null
 auditpol.exe /set /category:* /failure:enable | out-null
 
 #Disabling Services 
-$BadService = @("tapisrv","bthserv","mcx2svc","remoteregistry","seclogon","telnet","tlntsvr","p2pimsvc","simptcp","fax","msftpsvc","cscservice","fax","msftpsvc","webclient")
+$BadService = @("tapisrv","bthserv","mcx2svc","remoteregistry","seclogon","telnet","tlntsvr","p2pimsvc","simptcp","fax","msftpsvc","cscservice","fax","msftpsvc","webclient","W3SVC","IIS","Smtpsvc","Nntpsvc","Iisadmin","Msftpsvc",	)
 foreach($BadService in $DisableServices){
 Stop-Service $BadService -Force -ErrorAction SilentlyContinue | out-null
 Set-Service $BadService -StartupType Disabled -ErrorAction SilentlyContinue | out-null}
