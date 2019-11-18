@@ -2,3 +2,4 @@ Sufficent Password History
 Open File Sharing
 Enable Event Log Service 
 Do not display user last name
+WWWP Stoped and Disabled
