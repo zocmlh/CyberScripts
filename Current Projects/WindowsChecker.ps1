@@ -66,3 +66,6 @@ $FWProfiles | ForEach-Object{
 #auditpol.exe /get /category:* | Tee-Object -FilePath "C:\Powershell Output\Audits.txt"
 
 #User Rights Assignment
+secedit /export /areas SECURITYPOLICY /cfg 'C:\Powershell Output\SECURITYPOLICIES.txt'
+
+#List all users and their permissions
