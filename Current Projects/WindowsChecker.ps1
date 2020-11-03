@@ -50,6 +50,7 @@ Get-NetTCPConnection | Where-Object {$_.State -eq "Established"} | Select-Object
 
 
 #Firewall Properties
+<#
 $FWProfiles = (Get-NetFirewallProfile);
 Write-Host "Windows Firewall Profile Statuses" -Foregroundcolor Yellow;
 $FWProfiles | ForEach-Object{
@@ -59,15 +60,9 @@ $FWProfiles | ForEach-Object{
         Write-Host "The Windows Firewall $($_.Name) profile is disabled" -Foregroundcolor Red
         }
       }
+#>
 
-$FWDProfiles = (Get-NetFirewallProfile -Name Domain)
-Write-Host "Windows Firewall Domain" -ForegroundColor Yellow
-$FWDProfiles | ForEach-Object{
-  if($_.Enabled -eq 1){
-    Write-Host "Domain $($_.Name) Domain" -ForegroundColor Green
-  }elseif ($_.Disabled -eq 1) {
-    Write-Host "Domain $($_.Name) Domain" -ForegroundColor Red
-  }elseif ($_.NotConfigured -eq 1) {
-    Write-Host "Domain $($_.Name) Domain" -ForegroundColor Yellow
-  }
-}
+#Auditing
+#auditpol.exe /get /category:* | Tee-Object -FilePath "C:\Powershell Output\Audits.txt"
+
+#User Rights Assignment
