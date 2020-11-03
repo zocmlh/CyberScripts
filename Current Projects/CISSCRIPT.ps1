@@ -84,13 +84,62 @@ $CISButton10.Font                    = New-Object System.Drawing.Font('Microsoft
 
 $Form.controls.AddRange(@($CISButton1,$CISButton2,$CISButton3,$CISButton4,$CISButton5,$CISButton6,$CISButton7,$CISButton8,$CISButton9,$CISButton10))
 
-$CISButton1.Add_Click({  })
-$CISButton1.Add_Click({  })
-$CISButton3.Add_Click({  })
-$CISButton4.Add_Click({  })
-$CISButton5.Add_Click({  })
-$CISButton6.Add_Click({  })
-$CISButton7.Add_Click({  })
-$CISButton8.Add_Click({  })
-$CISButton9.Add_Click({  })
-$CISButton10.Add_Click({  })
+$CISButton1.Add_Click({  
+
+})
+
+
+
+$CISButton1.Add_Click({ 
+
+ })
+
+
+
+$CISButton3.Add_Click({ 
+
+ })
+
+
+
+$CISButton4.Add_Click({ 
+
+ })
+
+
+
+$CISButton5.Add_Click({ 
+
+ })
+
+
+
+$CISButton6.Add_Click({
+
+  })
+
+
+
+$CISButton7.Add_Click({ 
+
+ })
+
+
+
+$CISButton8.Add_Click({  
+
+})
+
+
+
+$CISButton9.Add_Click({  
+
+})
+
+
+
+$CISButton10.Add_Click({ 
+    
+ })
+
+
