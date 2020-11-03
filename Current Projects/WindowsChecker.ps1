@@ -1,5 +1,12 @@
 #Powershell Check Services
-#New-Item -ItemType Directory -Path 'C:\Powershell Output'
+#New-Item -ItemType Directory -Path 'C:\Powershell Output'	
+
+#Server installs
+
+
+#Windows installs
+
+
 #Disabled Services
 <#
     $DisServices = @(
@@ -66,6 +73,7 @@ $FWProfiles | ForEach-Object{
 #auditpol.exe /get /category:* | Tee-Object -FilePath "C:\Powershell Output\Audits.txt"
 
 #User Rights Assignment
-secedit /export /areas SECURITYPOLICY /cfg 'C:\Powershell Output\SECURITYPOLICIES.txt'
+#secedit /export /areas SECURITYPOLICY /cfg 'C:\Powershell Output\SECURITYPOLICIES.txt'
+#Need to work on this, does not get everything that i want it to and gives more info about stuff that i dont need
 
-#List all users and their permissions
+
