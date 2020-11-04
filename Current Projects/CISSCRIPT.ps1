@@ -2,13 +2,15 @@
 
 #Main GUI Script
 Function CISScrtiptGUI{
-    #CIS 1: Account Polices
+    #CIS 1: Account Polices (1)
         function AccountPolices {
         Add-Type -AssemblyName System.Windows.Forms
         [System.Windows.Forms.Application]::EnableVisualStyles()
         
         $Form                            = New-Object system.Windows.Forms.Form
         $Form.ClientSize                 = New-Object System.Drawing.Point(285,89)
+        $Form.FormBorderStyle            = 'Fixed3D'
+        $Form.MaximizeBox                = $false
         $Form.text                       = "Account Polices"
         $Form.TopMost                    = $false
         
@@ -30,16 +32,19 @@ Function CISScrtiptGUI{
         
         $Form.controls.AddRange(@($PPButton,$ALButton))
         [void]$Form.ShowDialog()
+
         $PPButton.Add_Click({  })
         $ALButton.Add_Click({  })
         }
-    #CIS 2: Local Polices
+    #CIS 2: Local Polices (2)
         function LocalPolices {
             Add-Type -AssemblyName System.Windows.Forms
             [System.Windows.Forms.Application]::EnableVisualStyles()
             
             $Form                            = New-Object system.Windows.Forms.Form
             $Form.ClientSize                 = New-Object System.Drawing.Point(300,120)
+            $Form.FormBorderStyle            = 'Fixed3D'
+            $Form.MaximizeBox                = $false
             $Form.text                       = "Loc"
             $Form.TopMost                    = $false
             
@@ -69,18 +74,21 @@ Function CISScrtiptGUI{
 
             $Form.controls.AddRange(@($APButton,$URAButton,$SOButton))
             [void]$Form.ShowDialog()
+
+
             $APButton.Add_Click({  })
             $URAButton.Add_Click({  })
-            $APButton.Add_Click({  })
-
+            $SOButton.Add_Click({  })
         }
-    #CIS 5: System Services
+    #CIS 5: System Services (3)
         function SystemServices {
             Add-Type -AssemblyName System.Windows.Forms
             [System.Windows.Forms.Application]::EnableVisualStyles()
             
             $Form                            = New-Object system.Windows.Forms.Form
             $Form.ClientSize                 = New-Object System.Drawing.Point(285,80)
+            $Form.FormBorderStyle            = 'Fixed3D'
+            $Form.MaximizeBox                = $false
             $Form.text                       = "System Services"
             $Form.TopMost                    = $false
             
@@ -94,15 +102,17 @@ Function CISScrtiptGUI{
 
             $Form.controls.AddRange(@($SSButton))
             [void]$Form.ShowDialog()
-            $CISSystemServices.Add_Click({  })
+            $SSButton.Add_Click({ Write-Output "Hello World" })
         }
-    #CIS 9: Windows Firewall with Advanced Security
+    #CIS 9: Windows Firewall with Advanced Security (4)
         function WindowsFirewall {
             Add-Type -AssemblyName System.Windows.Forms
             [System.Windows.Forms.Application]::EnableVisualStyles()
             
             $Form                            = New-Object system.Windows.Forms.Form
             $Form.ClientSize                 = New-Object System.Drawing.Point(300,120)
+            $Form.FormBorderStyle            = 'Fixed3D'
+            $Form.MaximizeBox                = $false
             $Form.text                       = "CIS"
             $Form.TopMost                    = $false
             
@@ -122,29 +132,31 @@ Function CISScrtiptGUI{
             $PPButton.location                = New-Object System.Drawing.Point(160,20)
             $PPButton.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
             
-            $PUBPButton                         = New-Object system.Windows.Forms.Button
-            $PUBPButton.text                    = "Public Proflie"
-            $PUBPButton.width                   = 110
-            $PUBPButton.height                  = 35
-            $PUBPButton.Enabled                 = $true
-            $PUBPButton.location                = New-Object System.Drawing.Point(90,70)
-            $PUBPButton.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+            $PUBPButton                       = New-Object system.Windows.Forms.Button
+            $PUBPButton.text                  = "Public Proflie"
+            $PUBPButton.width                 = 110
+            $PUBPButton.height                = 35
+            $PUBPButton.Enabled               = $true
+            $PUBPButton.location              = New-Object System.Drawing.Point(90,70)
+            $PUBPButton.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
             $Form.controls.AddRange(@($DPButton,$PPButton,$PUBPButton))
 
             [void]$Form.ShowDialog()
 
-            $APButton.Add_Click({  })
-            $URAButton.Add_Click({  })
-            $APButton.Add_Click({  })
+            $DPButton.Add_Click({ Write-Output "Hello World" })
+            $PPButton.Add_Click({ Write-Output "Hello World" })
+            $PUBPButton.Add_Click({ Write-Output "Hello World" })
         }
-    #CIS 17: Advanced Audit Policy Configuration
+    #CIS 17: Advanced Audit Policy Configuration (5)
         function AdavncedAuditPolicyConfig {
             Add-Type -AssemblyName System.Windows.Forms
             [System.Windows.Forms.Application]::EnableVisualStyles()
 
             $Form                               = New-Object system.Windows.Forms.Form
-            $Form.ClientSize                    = New-Object System.Drawing.Point(145,225)
+            $Form.ClientSize                    = New-Object System.Drawing.Point(285,225)
+            $Form.FormBorderStyle               = 'Fixed3D'
+            $Form.MaximizeBox                   = $false
             $Form.text                          = "CIS"
             $Form.TopMost                       = $false
 
@@ -180,13 +192,13 @@ Function CISScrtiptGUI{
             $AAPCButton4.location                = New-Object System.Drawing.Point(20,135)
             $AAPCButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-            $AAPCButton4                         = New-Object system.Windows.Forms.Button
-            $AAPCButton4.text                    = "Logon/Logoff"
-            $AAPCButton4.width                   = 105
-            $AAPCButton4.height                  = 35
-            $AAPCButton4.Enabled                 = $true
-            $AAPCButton4.location                = New-Object System.Drawing.Point(20,175)
-            $AAPCButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+            $AAPCButton5                         = New-Object system.Windows.Forms.Button
+            $AAPCButton5.text                    = "Logon/Logoff"
+            $AAPCButton5.width                   = 105
+            $AAPCButton5.height                  = 35
+            $AAPCButton5.Enabled                 = $true
+            $AAPCButton5.location                = New-Object System.Drawing.Point(90,180)
+            $AAPCButton5.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
             $AAPCButton6                         = New-Object system.Windows.Forms.Button
             $AAPCButton6.text                    = "Object Acess"
@@ -222,37 +234,41 @@ Function CISScrtiptGUI{
 
             $Form.controls.AddRange(@($AAPCButton1,$AAPCButton2,$AAPCButton3,$AAPCButton4,$AAPCButton5,$AAPCButton6,$AAPCButton7,$AAPCButton8,$AAPCButton9))
 
+            [void]$Form.ShowDialog()
 
-            $AAPCButton1.Add_Click({  })
+            $AAPCButton1.Add_Click({ Write-Output "Hello World" })
 
-            $AAPCButton2.Add_Click({  })
+            $AAPCButton2.Add_Click({ Write-Output "Hello World" })
 
-            $AAPCButton3.Add_Click({  })
+            $AAPCButton3.Add_Click({ Write-Output "Hello World" })
 
-            $AAPCButton4.Add_Click({  })
+            $AAPCButton4.Add_Click({ Write-Output "Hello World" })
 
-            $AAPCButton5.Add_Click({  })
+            $AAPCButton5.Add_Click({ Write-Output "Hello World" })
 
-            $AAPCButton6.Add_Click({  })
+            $AAPCButton6.Add_Click({ Write-Output "Hello World" })
 
-            $AAPCButton7.Add_Click({  })
+            $AAPCButton7.Add_Click({ Write-Output "Hello World" })
 
-            $AAPCButton8.Add_Click({  })
+            $AAPCButton8.Add_Click({ Write-Output "Hello World" })
 
-            $AAPCButton9.Add_Click({  })
+            $AAPCButton9.Add_Click({ Write-Output "Hello World" })
+
         }
-    #CIS 18: Administrative Templates (Computer)
+    #CIS 18: Administrative Templates (Computer) (6)
         function AdministrativeTemplatesComputer {
             Add-Type -AssemblyName System.Windows.Forms
             [System.Windows.Forms.Application]::EnableVisualStyles()
         
             $Form                               = New-Object system.Windows.Forms.Form
-            $Form.ClientSize                    = New-Object System.Drawing.Point(145,225)
+            $Form.ClientSize                    = New-Object System.Drawing.Point(285,225)
+            $Form.FormBorderStyle               = 'Fixed3D'
+            $Form.MaximizeBox                   = $false
             $Form.text                          = "CIS"
             $Form.TopMost                       = $false
         
             $ATCButton1                         = New-Object system.Windows.Forms.Button
-            $ATCButton1.text                    = "1"
+            $ATCButton1.text                    = "Control Panel"
             $ATCButton1.width                   = 105
             $ATCButton1.height                  = 35
             $ATCButton1.Enabled                 = $true
@@ -260,7 +276,7 @@ Function CISScrtiptGUI{
             $ATCButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
         
             $ATCButton2                         = New-Object system.Windows.Forms.Button
-            $ATCButton2.text                    = "2"
+            $ATCButton2.text                    = "LAPS"
             $ATCButton2.width                   = 105
             $ATCButton2.height                  = 35
             $ATCButton2.Enabled                 = $true
@@ -268,7 +284,7 @@ Function CISScrtiptGUI{
             $ATCButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
         
             $ATCButton3                         = New-Object system.Windows.Forms.Button
-            $ATCButton3.text                    = "3"
+            $ATCButton3.text                    = "MS Security Guide"
             $ATCButton3.width                   = 105
             $ATCButton3.height                  = 35
             $ATCButton3.Enabled                 = $true
@@ -276,23 +292,23 @@ Function CISScrtiptGUI{
             $ATCButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
         
             $ATCButton4                         = New-Object system.Windows.Forms.Button
-            $ATCButton4.text                    = "4"
+            $ATCButton4.text                    = "MSS (Legacy)"
             $ATCButton4.width                   = 105
             $ATCButton4.height                  = 35
             $ATCButton4.Enabled                 = $true
             $ATCButton4.location                = New-Object System.Drawing.Point(20,135)
             $ATCButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
         
-            $ATCButton4                         = New-Object system.Windows.Forms.Button
-            $ATCButton4.text                    = "5"
-            $ATCButton4.width                   = 105
-            $ATCButton4.height                  = 35
-            $ATCButton4.Enabled                 = $true
-            $ATCButton4.location                = New-Object System.Drawing.Point(20,175)
-            $ATCButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+            $ATCButton5                         = New-Object system.Windows.Forms.Button
+            $ATCButton5.text                    = "Network"
+            $ATCButton5.width                   = 105
+            $ATCButton5.height                  = 35
+            $ATCButton5.Enabled                 = $true
+            $ATCButton5.location                = New-Object System.Drawing.Point(90,175)
+            $ATCButton5.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
         
             $ATCButton6                         = New-Object system.Windows.Forms.Button
-            $ATCButton6.text                    = "6"
+            $ATCButton6.text                    = "Printers"
             $ATCButton6.width                   = 105
             $ATCButton6.height                  = 35
             $ATCButton6.Enabled                 = $true
@@ -300,7 +316,7 @@ Function CISScrtiptGUI{
             $ATCButton6.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
         
             $ATCButton7                         = New-Object system.Windows.Forms.Button
-            $ATCButton7.text                    = "7"
+            $ATCButton7.text                    = "Start Menu and Taskbar"
             $ATCButton7.width                   = 105
             $ATCButton7.height                  = 35
             $ATCButton7.Enabled                 = $true
@@ -308,7 +324,7 @@ Function CISScrtiptGUI{
             $ATCButton7.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
         
             $ATCButton8                         = New-Object system.Windows.Forms.Button
-            $ATCButton8.text                    = "8"
+            $ATCButton8.text                    = "System"
             $ATCButton8.width                   = 105
             $ATCButton8.height                  = 35
             $ATCButton8.Enabled                 = $true
@@ -316,59 +332,50 @@ Function CISScrtiptGUI{
             $ATCButton8.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
         
             $ATCButton9                         = New-Object system.Windows.Forms.Button
-            $ATCButton9.text                    = "9"
+            $ATCButton9.text                    = "Windows Components"
             $ATCButton9.width                   = 105
             $ATCButton9.height                  = 35
             $ATCButton9.Enabled                 = $true
             $ATCButton9.location                = New-Object System.Drawing.Point(160,135)
             $ATCButton9.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-        
-            $ATCButton10                        = New-Object system.Windows.Forms.Button
-            $ATCButton10.text                   = "10"
-            $ATCButton10.width                  = 105
-            $ATCButton10.height                 = 35
-            $ATCButton10.Enabled                = $true
-            $ATCButton10.location               = New-Object System.Drawing.Point(160,175)
-            $ATCButton10.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
            
-           
-            $Form.controls.AddRange(@($ATCButton1,$ATCButton2,$ATCButton3,$ATCButton4,$ATCButton5,$ATCButton6,$ATCButton7,$ATCButton8,$ATCButton9,$ATCButton10))
+            $Form.controls.AddRange(@($ATCButton1,$ATCButton2,$ATCButton3,$ATCButton4,$ATCButton5,$ATCButton6,$ATCButton7,$ATCButton8,$ATCButton9))
 
-            $ATCButton1.Add_Click({  })
+            $ATCButton1.Add_Click({ Write-Output "Hello World" })
         
-            $ATCButton2.Add_Click({  })
+            $ATCButton2.Add_Click({ Write-Output "Hello World" })
         
-            $ATCButton3.Add_Click({  })
+            $ATCButton3.Add_Click({ Write-Output "Hello World" })
         
-            $ATCButton4.Add_Click({  })
+            $ATCButton4.Add_Click({ Write-Output "Hello World" })
         
-            $ATCButton5.Add_Click({  })
+            $ATCButton5.Add_Click({ Write-Output "Hello World" })
         
-            $ATCButton6.Add_Click({  })
+            $ATCButton6.Add_Click({ Write-Output "Hello World" })
         
-            $ATCButton7.Add_Click({  })
+            $ATCButton7.Add_Click({ Write-Output "Hello World" })
         
-            $ATCButton8.Add_Click({  })
+            $ATCButton8.Add_Click({ Write-Output "Hello World" })
         
-            $ATCButton9.Add_Click({  })
-        
-            $ATCButton10.Add_Click({  })
+            $ATCButton9.Add_Click({ Write-Output "Hello World" })
         
         
             [void]$Form.ShowDialog()
         }
-    #CIS 19: Administrative Templates (User)
+    #CIS 19: Administrative Templates (User) (7)
     function AdministrativeTemplatesUser {
             Add-Type -AssemblyName System.Windows.Forms
             [System.Windows.Forms.Application]::EnableVisualStyles()
 
             $Form                               = New-Object system.Windows.Forms.Form
-            $Form.ClientSize                    = New-Object System.Drawing.Point(145,225)
+            $Form.ClientSize                    = New-Object System.Drawing.Point(145,230)
+            $Form.FormBorderStyle               = 'Fixed3D'
+            $Form.MaximizeBox                   = $false
             $Form.text                          = "CIS"
             $Form.TopMost                       = $false
 
             $ATUButton1                         = New-Object system.Windows.Forms.Button
-            $ATUButton1.text                    = "1"
+            $ATUButton1.text                    = "Control Panel"
             $ATUButton1.width                   = 105
             $ATUButton1.height                  = 35
             $ATUButton1.Enabled                 = $true
@@ -376,7 +383,7 @@ Function CISScrtiptGUI{
             $ATUButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
             $ATUButton2                         = New-Object system.Windows.Forms.Button
-            $ATUButton2.text                    = "2"
+            $ATUButton2.text                    = "Shared Folders"
             $ATUButton2.width                   = 105
             $ATUButton2.height                  = 35
             $ATUButton2.Enabled                 = $true
@@ -384,7 +391,7 @@ Function CISScrtiptGUI{
             $ATUButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
             $ATUButton3                         = New-Object system.Windows.Forms.Button
-            $ATUButton3.text                    = "3"
+            $ATUButton3.text                    = "Start Menu and Taskbar"
             $ATUButton3.width                   = 105
             $ATUButton3.height                  = 35
             $ATUButton3.Enabled                 = $true
@@ -392,85 +399,34 @@ Function CISScrtiptGUI{
             $ATUButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
             $ATUButton4                         = New-Object system.Windows.Forms.Button
-            $ATUButton4.text                    = "4"
+            $ATUButton4.text                    = "System"
             $ATUButton4.width                   = 105
             $ATUButton4.height                  = 35
             $ATUButton4.Enabled                 = $true
             $ATUButton4.location                = New-Object System.Drawing.Point(20,135)
             $ATUButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-            $ATUButton4                         = New-Object system.Windows.Forms.Button
-            $ATUButton4.text                    = "5"
-            $ATUButton4.width                   = 105
-            $ATUButton4.height                  = 35
-            $ATUButton4.Enabled                 = $true
-            $ATUButton4.location                = New-Object System.Drawing.Point(20,175)
-            $ATUButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-            $ATUButton6                         = New-Object system.Windows.Forms.Button
-            $ATUButton6.text                    = "6"
-            $ATUButton6.width                   = 105
-            $ATUButton6.height                  = 35
-            $ATUButton6.Enabled                 = $true
-            $ATUButton6.location                = New-Object System.Drawing.Point(160,15)
-            $ATUButton6.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-            $ATUButton7                         = New-Object system.Windows.Forms.Button
-            $ATUButton7.text                    = "7"
-            $ATUButton7.width                   = 105
-            $ATUButton7.height                  = 35
-            $ATUButton7.Enabled                 = $true
-            $ATUButton7.location                = New-Object System.Drawing.Point(160,55)
-            $ATUButton7.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-            $ATUButton8                         = New-Object system.Windows.Forms.Button
-            $ATUButton8.text                    = "8"
-            $ATUButton8.width                   = 105
-            $ATUButton8.height                  = 35
-            $ATUButton8.Enabled                 = $true
-            $ATUButton8.location                = New-Object System.Drawing.Point(160,95)
-            $ATUButton8.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-            $ATUButton9                         = New-Object system.Windows.Forms.Button
-            $ATUButton9.text                    = "9"
-            $ATUButton9.width                   = 105
-            $ATUButton9.height                  = 35
-            $ATUButton9.Enabled                 = $true
-            $ATUButton9.location                = New-Object System.Drawing.Point(160,135)
-            $ATUButton9.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-            $ATUButton10                        = New-Object system.Windows.Forms.Button
-            $ATUButton10.text                   = "10"
-            $ATUButton10.width                  = 105
-            $ATUButton10.height                 = 35
-            $ATUButton10.Enabled                = $true
-            $ATUButton10.location               = New-Object System.Drawing.Point(160,175)
-            $ATUButton10.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+            $ATUButton5                         = New-Object system.Windows.Forms.Button
+            $ATUButton5.text                    = "Windows Components"
+            $ATUButton5.width                   = 105
+            $ATUButton5.height                  = 35
+            $ATUButton5.Enabled                 = $true
+            $ATUButton5.location                = New-Object System.Drawing.Point(20,175)
+            $ATUButton5.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 
-            $Form.controls.AddRange(@($ATUButton1,$ATUButton2,$ATUButton3,$ATUButton4,$ATUButton5,$ATUButton6,$ATUButton7,$ATUButton8,$ATUButton9,$ATUButton10))
+            $Form.controls.AddRange(@($ATUButton1,$ATUButton2,$ATUButton3,$ATUButton4,$ATUButton5))
 
 
-            $ATUButton1.Add_Click({  })
+            $ATUButton1.Add_Click({ Write-Output "Hello World" })
 
-            $ATUButton2.Add_Click({  })
+            $ATUButton2.Add_Click({ Write-Output "Hello World" })
 
-            $ATUButton3.Add_Click({  })
+            $ATUButton3.Add_Click({ Write-Output "Hello World" })
 
-            $ATUButton4.Add_Click({  })
+            $ATUButton4.Add_Click({ Write-Output "Hello World" })
 
-            $ATUButton5.Add_Click({  })
-
-            $ATUButton6.Add_Click({  })
-
-            $ATUButton7.Add_Click({  })
-
-            $ATUButton8.Add_Click({  })
-
-            $ATUButton9.Add_Click({  })
-
-            $ATUButton10.Add_Click({  })
-
+            $ATUButton5.Add_Click({ Write-Output "Hello World" })
 
             [void]$Form.ShowDialog()
         }
@@ -480,7 +436,9 @@ Function CISScrtiptGUI{
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
     $Form                               = New-Object system.Windows.Forms.Form
-    $Form.ClientSize                    = New-Object System.Drawing.Point(190,320)
+    $Form.ClientSize                    = New-Object System.Drawing.Point(185,305)
+    $Form.FormBorderStyle               = 'Fixed3D'
+    $Form.MaximizeBox                   = $false
     $Form.text                          = "CIS"
     $Form.TopMost                       = $false
 
@@ -509,7 +467,7 @@ Function CISScrtiptGUI{
     $CISButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $CISButton4                         = New-Object system.Windows.Forms.Button
-    $CISButton4.text                    = "4"
+    $CISButton4.text                    = "Windows Firewall"
     $CISButton4.width                   = 105
     $CISButton4.height                  = 35
     $CISButton4.Enabled                 = $true
@@ -517,7 +475,7 @@ Function CISScrtiptGUI{
     $CISButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $CISButton5                         = New-Object system.Windows.Forms.Button
-    $CISButton5.text                    = "5"
+    $CISButton5.text                    = "AAPConfig"
     $CISButton5.width                   = 105
     $CISButton5.height                  = 35
     $CISButton5.Enabled                 = $true
@@ -525,7 +483,7 @@ Function CISScrtiptGUI{
     $CISButton5.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $CISButton6                         = New-Object system.Windows.Forms.Button
-    $CISButton6.text                    = "6"
+    $CISButton6.text                    = "CompAdmin Templates"
     $CISButton6.width                   = 105
     $CISButton6.height                  = 35
     $CISButton6.Enabled                 = $true
@@ -533,7 +491,7 @@ Function CISScrtiptGUI{
     $CISButton6.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $CISButton7                         = New-Object system.Windows.Forms.Button
-    $CISButton7.text                    = "7"
+    $CISButton7.text                    = "UserAdmin Templates"
     $CISButton7.width                   = 105
     $CISButton7.height                  = 35
     $CISButton7.Enabled                 = $true
@@ -559,8 +517,8 @@ Function CISScrtiptGUI{
     $CISButton7.Add_Click({ AdministrativeTemplatesUser })
 
     [void]$Form.ShowDialog()
-}
-MainGUI
+        }
+    MainGUI
 } #End Function
 #Call Function
 CISScrtiptGUI
