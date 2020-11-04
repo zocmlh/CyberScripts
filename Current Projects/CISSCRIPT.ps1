@@ -33,7 +33,6 @@ Function CISScrtiptGUI{
         $PPButton.Add_Click({  })
         $ALButton.Add_Click({  })
     }
-
     #CIS 2: Local Polices
         function LocalPolices {
             Add-Type -AssemblyName System.Windows.Forms
@@ -96,12 +95,27 @@ Function CISScrtiptGUI{
             [void]$Form.ShowDialog()
             $CISSystemServices.Add_Click({  })
         }
+    #CIS 9: Windows Firewall with Advanced Security
+        function DomainProfile {
+
+        }
+    #CIS 17: Advanced Audit Policy Configuration
+        function AdavncedAuditPolicyConfig {
+
+        }
+    #CIS 18: Administrative Templates
+        function AdministrativeTemplates {
+
+        }
+    
+    #Main GUI
+    function MainGUI {
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
     $Form                               = New-Object system.Windows.Forms.Form
-    $Form.ClientSize                    = New-Object System.Drawing.Point(270,225)
-    $Form.text                          = "Form"
+    $Form.ClientSize                    = New-Object System.Drawing.Point(145,225)
+    $Form.text                          = "CIS"
     $Form.TopMost                       = $false
 
     $CISButton1                         = New-Object system.Windows.Forms.Button
@@ -144,48 +158,8 @@ Function CISScrtiptGUI{
     $CISButton5.location                = New-Object System.Drawing.Point(20,175)
     $CISButton5.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-    $CISButton6                         = New-Object system.Windows.Forms.Button
-    $CISButton6.text                    = "6"
-    $CISButton6.width                   = 105
-    $CISButton6.height                  = 35
-    $CISButton6.Enabled                 = $true
-    $CISButton6.location                = New-Object System.Drawing.Point(145,15)
-    $CISButton6.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-    $CISButton7                         = New-Object system.Windows.Forms.Button
-    $CISButton7.text                    = "7"
-    $CISButton7.width                   = 105
-    $CISButton7.height                  = 35
-    $CISButton7.Enabled                 = $true
-    $CISButton7.location                = New-Object System.Drawing.Point(145,55)
-    $CISButton7.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-    $CISButton8                         = New-Object system.Windows.Forms.Button
-    $CISButton8.text                    = "8"
-    $CISButton8.width                   = 105
-    $CISButton8.height                  = 35
-    $CISButton8.Enabled                 = $true
-    $CISButton8.location                = New-Object System.Drawing.Point(145,95)
-    $CISButton8.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-
-    $CISButton9                         = New-Object system.Windows.Forms.Button
-    $CISButton9.text                    = "9"
-    $CISButton9.width                   = 105
-    $CISButton9.height                  = 35
-    $CISButton9.Enabled                 = $true
-    $CISButton9.location                = New-Object System.Drawing.Point(145,135)
-    $CISButton9.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-    $CISButton10                         = New-Object system.Windows.Forms.Button
-    $CISButton10.text                    = "10"
-    $CISButton10.width                   = 105
-    $CISButton10.height                  = 35
-    $CISButton10.Enabled                 = $true
-    $CISButton10.location                = New-Object System.Drawing.Point(145,175)
-    $CISButton10.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-    $Form.controls.AddRange(@($CISButton1,$CISButton2,$CISButton3,$CISButton4,$CISButton5,$CISButton6,$CISButton7,$CISButton8,$CISButton9,$CISButton10))
+    $Form.controls.AddRange(@($CISButton1,$CISButton2,$CISButton3,$CISButton4,$CISButton5))
 
 
 
@@ -225,6 +199,8 @@ Function CISScrtiptGUI{
 
 
     [void]$Form.ShowDialog()
+}
+MainGUI
 } #End Function
 #Call Function
 CISScrtiptGUI
