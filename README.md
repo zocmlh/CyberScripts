@@ -1,2 +1,2 @@
 # Super-Duper-CyberScript
-Property of Kalaheo High ROTC CyberPatriot Team
+PLease do not copy any of the code here as it belongs to my schools cyberpatriot team
