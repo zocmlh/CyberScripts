@@ -102,7 +102,7 @@ Function CISScrtiptGUI{
 
             $Form.controls.AddRange(@($SSButton))
             [void]$Form.ShowDialog()
-            $SSButton.Add_Click({ Write-Output "Hello World" })
+            $SSButton.Add_Click({  })
         }
     #CIS 9: Windows Firewall with Advanced Security (4)
         function WindowsFirewall {
@@ -144,9 +144,9 @@ Function CISScrtiptGUI{
 
             [void]$Form.ShowDialog()
 
-            $DPButton.Add_Click({ Write-Output "Hello World" })
-            $PPButton.Add_Click({ Write-Output "Hello World" })
-            $PUBPButton.Add_Click({ Write-Output "Hello World" })
+            $DPButton.Add_Click({  })
+            $PPButton.Add_Click({  })
+            $PUBPButton.Add_Click({  })
         }
     #CIS 17: Advanced Audit Policy Configuration (5)
         function AdavncedAuditPolicyConfig {
@@ -236,23 +236,23 @@ Function CISScrtiptGUI{
 
             [void]$Form.ShowDialog()
 
-            $AAPCButton1.Add_Click({ Write-Output "Hello World" })
+            $AAPCButton1.Add_Click({  })
 
-            $AAPCButton2.Add_Click({ Write-Output "Hello World" })
+            $AAPCButton2.Add_Click({  })
 
-            $AAPCButton3.Add_Click({ Write-Output "Hello World" })
+            $AAPCButton3.Add_Click({  })
 
-            $AAPCButton4.Add_Click({ Write-Output "Hello World" })
+            $AAPCButton4.Add_Click({  })
 
-            $AAPCButton5.Add_Click({ Write-Output "Hello World" })
+            $AAPCButton5.Add_Click({  })
 
-            $AAPCButton6.Add_Click({ Write-Output "Hello World" })
+            $AAPCButton6.Add_Click({  })
 
-            $AAPCButton7.Add_Click({ Write-Output "Hello World" })
+            $AAPCButton7.Add_Click({  })
 
-            $AAPCButton8.Add_Click({ Write-Output "Hello World" })
+            $AAPCButton8.Add_Click({  })
 
-            $AAPCButton9.Add_Click({ Write-Output "Hello World" })
+            $AAPCButton9.Add_Click({  })
 
         }
     #CIS 18: Administrative Templates (Computer) (6)
@@ -341,23 +341,23 @@ Function CISScrtiptGUI{
            
             $Form.controls.AddRange(@($ATCButton1,$ATCButton2,$ATCButton3,$ATCButton4,$ATCButton5,$ATCButton6,$ATCButton7,$ATCButton8,$ATCButton9))
 
-            $ATCButton1.Add_Click({ Write-Output "Hello World" })
+            $ATCButton1.Add_Click({  })
         
-            $ATCButton2.Add_Click({ Write-Output "Hello World" })
+            $ATCButton2.Add_Click({  })
         
-            $ATCButton3.Add_Click({ Write-Output "Hello World" })
+            $ATCButton3.Add_Click({  })
         
-            $ATCButton4.Add_Click({ Write-Output "Hello World" })
+            $ATCButton4.Add_Click({  })
         
-            $ATCButton5.Add_Click({ Write-Output "Hello World" })
+            $ATCButton5.Add_Click({  })
         
-            $ATCButton6.Add_Click({ Write-Output "Hello World" })
+            $ATCButton6.Add_Click({  })
         
-            $ATCButton7.Add_Click({ Write-Output "Hello World" })
+            $ATCButton7.Add_Click({  })
         
-            $ATCButton8.Add_Click({ Write-Output "Hello World" })
+            $ATCButton8.Add_Click({  })
         
-            $ATCButton9.Add_Click({ Write-Output "Hello World" })
+            $ATCButton9.Add_Click({  })
         
         
             [void]$Form.ShowDialog()
@@ -418,15 +418,15 @@ Function CISScrtiptGUI{
             $Form.controls.AddRange(@($ATUButton1,$ATUButton2,$ATUButton3,$ATUButton4,$ATUButton5))
 
 
-            $ATUButton1.Add_Click({ Write-Output "Hello World" })
+            $ATUButton1.Add_Click({  })
 
-            $ATUButton2.Add_Click({ Write-Output "Hello World" })
+            $ATUButton2.Add_Click({  })
 
-            $ATUButton3.Add_Click({ Write-Output "Hello World" })
+            $ATUButton3.Add_Click({  })
 
-            $ATUButton4.Add_Click({ Write-Output "Hello World" })
+            $ATUButton4.Add_Click({  })
 
-            $ATUButton5.Add_Click({ Write-Output "Hello World" })
+            $ATUButton5.Add_Click({  })
 
             [void]$Form.ShowDialog()
         }
