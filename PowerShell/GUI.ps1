@@ -1,7 +1,5 @@
 #Main GUI Script
-Function GUIScript{
-    
- 
+Function GUIScript{    
           function GUI1 {
             Add-Type -AssemblyName System.Windows.Forms
             [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -14,7 +12,7 @@ Function GUIScript{
             $Form.TopMost                       = $false
 
             $GUIButton1                         = New-Object system.Windows.Forms.Button
-            $GUIButton1.text                    = "Set Security Settings"
+            $GUIButton1.text                    = "1"
             $GUIButton1.width                   = 105
             $GUIButton1.height                  = 35
             $GUIButton1.Enabled                 = $true
@@ -31,12 +29,12 @@ Function GUIScript{
             Add-Type -AssemblyName System.Windows.Forms
             [System.Windows.Forms.Application]::EnableVisualStyles()
             
-            $Form                            = New-Object system.Windows.Forms.Form
-            $Form.ClientSize                 = New-Object System.Drawing.Point(300,120)
-            $Form.FormBorderStyle            = 'Fixed3D'
-            $Form.MaximizeBox                = $false
-            $Form.text                       = "GUI"
-            $Form.TopMost                    = $false
+            $Form                               = New-Object system.Windows.Forms.Form
+            $Form.ClientSize                    = New-Object System.Drawing.Point(300,120)
+            $Form.FormBorderStyle               = 'Fixed3D'
+            $Form.MaximizeBox                   = $false
+            $Form.text                          = "GUI"
+            $Form.TopMost                       = $false
             
             $GUIButton1                         = New-Object system.Windows.Forms.Button
             $GUIButton1.text                    = "1"
@@ -54,13 +52,13 @@ Function GUIScript{
             $GUIButton2.location                = New-Object System.Drawing.Point(160,20)
             $GUIButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
             
-            $GUIButton3                       = New-Object system.Windows.Forms.Button
-            $GUIButton3.text                  = "3"
-            $GUIButton3.width                 = 110
-            $GUIButton3.height                = 35
-            $GUIButton3.Enabled               = $true
-            $GUIButton3.location              = New-Object System.Drawing.Point(90,70)
-            $GUIButton3.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+            $GUIButton3                         = New-Object system.Windows.Forms.Button
+            $GUIButton3.text                    = "3"
+            $GUIButton3.width                   = 110
+            $GUIButton3.height                  = 35
+            $GUIButton3.Enabled                 = $true
+            $GUIButton3.location                = New-Object System.Drawing.Point(90,70)
+            $GUIButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
             $Form.controls.AddRange(@($GUIButton1,$GUIButton2,$GUIButton3))
 
