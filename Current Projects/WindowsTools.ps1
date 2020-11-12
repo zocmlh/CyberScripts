@@ -1,20 +1,89 @@
 #Main WINTOOL Script
 
+$path = "C:\Powershell Output"
+If(!(test-path $path))
+{
+      New-Item -ItemType Directory -Force -Path $path
+}
 
 #Ask for admin perms 
 Start-Process powershell.exe -Verb runAs -WindowStyle Hidden
-Function WINTOOLScript{
-  function WINTOOL1 {
+Function WINTOOLScript {
+   function WINTOOL1 {
     #Download essental programs
-    Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online
-    Start-Process https://git-scm.co
+    Add-Type -AssemblyName System.Windows.Forms
+    [System.Windows.Forms.Application]::EnableVisualStyles()
+
+    $Form                                   = New-Object system.Windows.Forms.Form
+    $Form.ClientSize                        = New-Object System.Drawing.Point(145,230)
+    $Form.FormBorderStyle                   = 'Fixed3D'
+    $Form.MaximizeBox                       = $false
+    $Form.text                              = "WINTOOL"
+    $Form.TopMost                           = $false
+
+    $WINTOOLButton1                         = New-Object system.Windows.Forms.Button
+    $WINTOOLButton1.text                    = "Windows RSAT Tools"
+    $WINTOOLButton1.width                   = 105
+    $WINTOOLButton1.height                  = 35
+    $WINTOOLButton1.Enabled                 = $true
+    $WINTOOLButton1.location                = New-Object System.Drawing.Point(20,15)
+    $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+    $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
+    $WINTOOLButton2.text                    = "Download GIT"
+    $WINTOOLButton2.width                   = 105
+    $WINTOOLButton2.height                  = 35
+    $WINTOOLButton2.Enabled                 = $true
+    $WINTOOLButton2.location                = New-Object System.Drawing.Point(20,55)
+    $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+    $WINTOOLButton3                         = New-Object system.Windows.Forms.Button
+    $WINTOOLButton3.text                    = "GIT Download GPO"
+    $WINTOOLButton3.width                   = 105
+    $WINTOOLButton3.height                  = 35
+    $WINTOOLButton3.Enabled                 = $true
+    $WINTOOLButton3.location                = New-Object System.Drawing.Point(20,95)
+    $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+    $WINTOOLButton4                         = New-Object system.Windows.Forms.Button
+    $WINTOOLButton4.text                    = "4"
+    $WINTOOLButton4.width                   = 105
+    $WINTOOLButton4.height                  = 35
+    $WINTOOLButton4.Enabled                 = $true
+    $WINTOOLButton4.location                = New-Object System.Drawing.Point(20,135)
+    $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+    $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
+    $WINTOOLButton5.text                    = "5"
+    $WINTOOLButton5.width                   = 105
+    $WINTOOLButton5.height                  = 35
+    $WINTOOLButton5.Enabled                 = $true
+    $WINTOOLButton5.location                = New-Object System.Drawing.Point(20,175)
+    $WINTOOLButton5.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+
+    $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLButton3,$WINTOOLButton4,$WINTOOLButton5))
+
+
+    $WINTOOLButton1.Add_Click({ Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online })
+
+    $WINTOOLButton2.Add_Click({ Start-Process https://git-scm.co })
+
+    $WINTOOLButton3.Add_Click({  })
+
+    $WINTOOLButton4.Add_Click({  })
+
+    $WINTOOLButton5.Add_Click({  })
+
+    [void]$Form.ShowDialog()
   }
+  #Logging tools
     function WINTOOL2 {
       Add-Type -AssemblyName System.Windows.Forms
       [System.Windows.Forms.Application]::EnableVisualStyles()
 
       $Form                                   = New-Object system.Windows.Forms.Form
-      $Form.ClientSize                        = New-Object System.Drawing.Point(145,75)
+      $Form.ClientSize                        = New-Object System.Drawing.Point(145,200)
       $Form.FormBorderStyle                   = 'Fixed3D'
       $Form.MaximizeBox                       = $false
       $Form.text                              = "WINTOOL"
@@ -33,7 +102,7 @@ Function WINTOOLScript{
       $WINTOOLButton2.width                   = 105
       $WINTOOLButton2.height                  = 35
       $WINTOOLButton2.Enabled                 = $true
-      $WINTOOLButton2.location                = New-Object System.Drawing.Point(20,15)
+      $WINTOOLButton2.location                = New-Object System.Drawing.Point(20,55)
       $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
       $WINTOOLButton3                         = New-Object system.Windows.Forms.Button
@@ -41,7 +110,7 @@ Function WINTOOLScript{
       $WINTOOLButton3.width                   = 105
       $WINTOOLButton3.height                  = 35
       $WINTOOLButton3.Enabled                 = $true
-      $WINTOOLButton3.location                = New-Object System.Drawing.Point(20,15)
+      $WINTOOLButton3.location                = New-Object System.Drawing.Point(20,95)
       $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
       $WINTOOLButton4                         = New-Object system.Windows.Forms.Button
@@ -49,7 +118,7 @@ Function WINTOOLScript{
       $WINTOOLButton4.width                   = 105
       $WINTOOLButton4.height                  = 35
       $WINTOOLButton4.Enabled                 = $true
-      $WINTOOLButton4.location                = New-Object System.Drawing.Point(20,15)
+      $WINTOOLButton4.location                = New-Object System.Drawing.Point(20,135)
       $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
       $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
@@ -57,14 +126,18 @@ Function WINTOOLScript{
       $WINTOOLButton5.width                   = 105
       $WINTOOLButton5.height                  = 35
       $WINTOOLButton5.Enabled                 = $true
-      $WINTOOLButton5.location                = New-Object System.Drawing.Point(20,15)
+      $WINTOOLButton5.location                = New-Object System.Drawing.Point(20,175)
       $WINTOOLButton5.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
       $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLButton3,$WINTOOLButton4,$WINTOOLButton5))
 
       $WINTOOLButton1.Add_Click({  })
 
-      $WINTOOLButton2.Add_Click({  })
+      $WINTOOLButton2.Add_Click({ 
+        Get-NetTcpConnection | 
+        Select-Object @{Name="Process";Expression={(Get-Process -Id $_.OwningProcess).ProcessName}},local*,remote*,state | 
+        Sort-Object -Property Process | Out-File 'C:\Powershell Output\ProcessOutput.txt'
+       })
 
       $WINTOOLButton3.Add_Click({  })
 
@@ -74,48 +147,117 @@ Function WINTOOLScript{
 
       [void]$Form.ShowDialog()
   }
+  #Import GPO policies +
   function WINTOOL3 {
-      Add-Type -AssemblyName System.Windows.Forms
-      [System.Windows.Forms.Application]::EnableVisualStyles()
-      
-      $Form                                   = New-Object system.Windows.Forms.Form
-      $Form.ClientSize                        = New-Object System.Drawing.Point(145,145)
-      $Form.FormBorderStyle                   = 'Fixed3D'
-      $Form.MaximizeBox                       = $false
-      $Form.text                              = "WINTOOL"
-      $Form.TopMost                           = $false
-      
-      $WINTOOLButton1                         = New-Object system.Windows.Forms.Button
-      $WINTOOLButton1.text                    = "1"
-      $WINTOOLButton1.width                   = 110
-      $WINTOOLButton1.height                  = 35
-      $WINTOOLButton1.enabled                 = $true
-      $WINTOOLButton1.location                = New-Object System.Drawing.Point(20,15)
-      $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-      
-      $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
-      $WINTOOLButton2.text                    = "2"
-      $WINTOOLButton2.width                   = 110
-      $WINTOOLButton2.height                  = 35
-      $WINTOOLButton2.Enabled                 = $true
-      $WINTOOLButton2.location                = New-Object System.Drawing.Point(20,55)
-      $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-      
-      $WINTOOLButton3                         = New-Object system.Windows.Forms.Button
-      $WINTOOLButton3.text                    = "3"
-      $WINTOOLButton3.width                   = 110
-      $WINTOOLButton3.height                  = 35
-      $WINTOOLButton3.Enabled                 = $true
-      $WINTOOLButton3.location                = New-Object System.Drawing.Point(20,95)
-      $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+    Add-Type -AssemblyName System.Windows.Forms
+    [System.Windows.Forms.Application]::EnableVisualStyles()
 
-      $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLButton3))
+    $Form                                   = New-Object system.Windows.Forms.Form
+    $Form.ClientSize                        = New-Object System.Drawing.Point(145,230)
+    $Form.FormBorderStyle                   = 'Fixed3D'
+    $Form.MaximizeBox                       = $false
+    $Form.text                              = "WINTOOL"
+    $Form.TopMost                           = $false
 
-      [void]$Form.ShowDialog()
+    $WINTOOLButton1                         = New-Object system.Windows.Forms.Button
+    $WINTOOLButton1.text                    = "1"
+    $WINTOOLButton1.width                   = 105
+    $WINTOOLButton1.height                  = 35
+    $WINTOOLButton1.Enabled                 = $true
+    $WINTOOLButton1.location                = New-Object System.Drawing.Point(20,15)
+    $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-      $WINTOOLButton1.Add_Click({  })
-      $WINTOOLButton2.Add_Click({  })
-      $WINTOOLButton3.Add_Click({  })
+    $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
+    $WINTOOLButton2.text                    = "2"
+    $WINTOOLButton2.width                   = 105
+    $WINTOOLButton2.height                  = 35
+    $WINTOOLButton2.Enabled                 = $true
+    $WINTOOLButton2.location                = New-Object System.Drawing.Point(20,55)
+    $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+    $WINTOOLButton3                         = New-Object system.Windows.Forms.Button
+    $WINTOOLButton3.text                    = "3"
+    $WINTOOLButton3.width                   = 105
+    $WINTOOLButton3.height                  = 35
+    $WINTOOLButton3.Enabled                 = $true
+    $WINTOOLButton3.location                = New-Object System.Drawing.Point(20,95)
+    $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+    $WINTOOLButton4                         = New-Object system.Windows.Forms.Button
+    $WINTOOLButton4.text                    = "4"
+    $WINTOOLButton4.width                   = 105
+    $WINTOOLButton4.height                  = 35
+    $WINTOOLButton4.Enabled                 = $true
+    $WINTOOLButton4.location                = New-Object System.Drawing.Point(20,135)
+    $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+    $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
+    $WINTOOLButton5.text                    = "Port Disable Outbound"
+    $WINTOOLButton5.width                   = 105
+    $WINTOOLButton5.height                  = 35
+    $WINTOOLButton5.Enabled                 = $true
+    $WINTOOLButton5.location                = New-Object System.Drawing.Point(20,175)
+    $WINTOOLButton5.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+
+    $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLButton3,$WINTOOLButton4,$WINTOOLButton5))
+
+
+    $WINTOOLButton1.Add_Click({  })
+
+    $WINTOOLButton2.Add_Click({  })
+
+    $WINTOOLButton3.Add_Click({  })
+
+    $WINTOOLButton4.Add_Click({  })
+
+    $WINTOOLButton5.Add_Click({ 
+          Add-Type -AssemblyName System.Windows.Forms
+          Add-Type -AssemblyName System.Drawing
+
+          $form = New-Object System.Windows.Forms.Form
+          $form.Text = 'Data Entry Form'
+          $form.Size = New-Object System.Drawing.Size(300,200)
+          $form.StartPosition = 'CenterScreen'
+
+          $okButton                        = New-Object System.Windows.Forms.Button
+          $okButton.Location               = New-Object System.Drawing.Point(75,120)
+          $okButton.Size                   = New-Object System.Drawing.Size(75,23)
+          $okButton.Text                   = 'OK'
+          $okButton.DialogResult           = [System.Windows.Forms.DialogResult]::OK
+          $form.AcceptButton               = $okButton
+
+          $cancelButton                   = New-Object System.Windows.Forms.Button
+          $cancelButton.Location          = New-Object System.Drawing.Point(150,120)
+          $cancelButton.Size              = New-Object System.Drawing.Size(75,23)
+          $cancelButton.Text              = 'Cancel'
+          $cancelButton.DialogResult      = [System.Windows.Forms.DialogResult]::Cancel
+          $form.CancelButton              = $cancelButton
+
+          $label                          = New-Object System.Windows.Forms.Label
+          $label.Location                 = New-Object System.Drawing.Point(10,20)
+          $label.Size                     = New-Object System.Drawing.Size(280,20)
+          $label.Text                     = 'Please enter the desired port to be disabled below'
+
+          $textBox                        = New-Object System.Windows.Forms.TextBox
+          $textBox.Location               = New-Object System.Drawing.Point(10,40)
+          $textBox.Size                   = New-Object System.Drawing.Size(260,20)
+
+          $form.Controls.AddRange(@($textBox,$label,$cancelButton,$okButton))
+
+          $form.Topmost = $true
+
+          $form.Add_Shown({$textBox.Select()})
+          $result = $form.ShowDialog()
+
+          if ($result -eq [System.Windows.Forms.DialogResult]::OK)
+          {
+              $x = $textBox.Text
+              New-NetFirewallRule -DisplayName "Disabling Port $x" -Direction Outbound -Profile any -Protocol tcp -RemotePort $x
+          }
+     })
+
+    [void]$Form.ShowDialog()
   }
   function WINTOOL4 {
     Add-Type -AssemblyName System.Windows.Forms
