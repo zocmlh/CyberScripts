@@ -72,8 +72,6 @@ $FWProfiles | ForEach-Object{
 #Auditing
 #auditpol.exe /get /category:* | Tee-Object -FilePath "C:\Powershell Output\Audits.txt"
 
-#User Rights Assignment
-#secedit /export /areas SECURITYPOLICY /cfg 'C:\Powershell Output\SECURITYPOLICIES.txt'
-#Need to work on this, does not get everything that i want it to and gives more info about stuff that i dont need
 
 
+#Get-ChildItem *.png,*.jpg,*.jpeh,*.tiff,*.raw,*.pdf,*.txt -recurse | foreach-object {move-item $_ -destination c:\destination -whatif}
