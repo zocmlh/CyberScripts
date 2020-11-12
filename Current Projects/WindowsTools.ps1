@@ -21,7 +21,7 @@ Function WINTOOLScript{
       $Form.TopMost                           = $false
 
       $WINTOOLButton1                         = New-Object system.Windows.Forms.Button
-      $WINTOOLButton1.text                    = "1"
+      $WINTOOLButton1.text                    = "Services"
       $WINTOOLButton1.width                   = 105
       $WINTOOLButton1.height                  = 35
       $WINTOOLButton1.Enabled                 = $true
@@ -29,7 +29,7 @@ Function WINTOOLScript{
       $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
       $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
-      $WINTOOLButton2.text                    = "2"
+      $WINTOOLButton2.text                    = "Processes"
       $WINTOOLButton2.width                   = 105
       $WINTOOLButton2.height                  = 35
       $WINTOOLButton2.Enabled                 = $true
@@ -37,7 +37,7 @@ Function WINTOOLScript{
       $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
       $WINTOOLButton3                         = New-Object system.Windows.Forms.Button
-      $WINTOOLButton3.text                    = "3"
+      $WINTOOLButton3.text                    = "Scheduled Tasks"
       $WINTOOLButton3.width                   = 105
       $WINTOOLButton3.height                  = 35
       $WINTOOLButton3.Enabled                 = $true
@@ -45,7 +45,7 @@ Function WINTOOLScript{
       $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
       $WINTOOLButton4                         = New-Object system.Windows.Forms.Button
-      $WINTOOLButton4.text                    = "4"
+      $WINTOOLButton4.text                    = "Firewall States"
       $WINTOOLButton4.width                   = 105
       $WINTOOLButton4.height                  = 35
       $WINTOOLButton4.Enabled                 = $true
@@ -53,7 +53,7 @@ Function WINTOOLScript{
       $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
       $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
-      $WINTOOLButton5.text                    = "5"
+      $WINTOOLButton5.text                    = "Audit State"
       $WINTOOLButton5.width                   = 105
       $WINTOOLButton5.height                  = 35
       $WINTOOLButton5.Enabled                 = $true
