@@ -1,4 +1,5 @@
 #Main WINTOOL Script
+Start-Process powershell.exe -Verb runAs -WindowStyle Hidden
 Function WINTOOLScript{
   function WINTOOL1 {
     Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online
