@@ -8,7 +8,7 @@
 
 
 #Disabled Services
-<#
+
     $DisServices = @(
         'BTAGService', 'bthserv', 'Browser', 'MapsBroker', 'lfsvc', 'lltdsvc', 
         'MSiSCSI', 'PNRPsvc', 'p2psvc', 'PNRPAutoReg', 'wercplsupport', 'RasAuto', 
@@ -18,14 +18,14 @@
         'XboxGipSvc', 'XblAuthManager', 'XblGameSave', 'XboxNetApiSvc'
     )
         foreach ($DisService in $DisServices) {
-            $Disname = (Get-Service $Service).Displayname
-            if ((Get-Service $Service).Status -eq 'Stopped') {
+            $Disname = (Get-Service $DisService).Displayname
+            if ((Get-Service $DisServices).Status -eq 'Stopped') {
                 Write-Host $Disname "is Disabled" -ForegroundColor green 
             } else {
                 Write-Host $Disname "is Enabled" -ForegroundColor red 
         }
 }
-#>
+
 #Get all running Processes and their Ports
 <#
 $obj=@()
