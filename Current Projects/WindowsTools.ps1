@@ -5,7 +5,7 @@ Start-Process powershell.exe -Verb runAs -WindowStyle Hidden
 Function WINTOOLScript{
   function WINTOOL1 {
     Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online
-
+    Start-Process https://git-scm.co
   }
     function WINTOOL2 {
       Add-Type -AssemblyName System.Windows.Forms
