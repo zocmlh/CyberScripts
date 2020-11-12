@@ -8,24 +8,24 @@
 
 
 #Disabled Services
-
-    $DisServices = @(
-        'BTAGService', 'bthserv', 'Browser', 'MapsBroker', 'lfsvc', 'lltdsvc', 
-        'MSiSCSI', 'PNRPsvc', 'p2psvc', 'PNRPAutoReg', 'wercplsupport', 'RasAuto', 
-        'SessionEnv', 'TermService', 'UmRdpService', 'RpcLocator', 'RemoteRegistry', 
-        'RemoteAccess', 'LanmanServer', 'SSDPSRV', 'upnphost', 'WerSvc', 'Wecsvc', 
-        'WMPNetworkSvc', 'icssvc', 'WpnService', 'PushToInstall', 'WinRM', 
-        'XboxGipSvc', 'XblAuthManager', 'XblGameSave', 'XboxNetApiSvc'
-    )
-        foreach ($DisService in $DisServices) {
-            $Disname = (Get-Service $DisService).Displayname
-            if ((Get-Service $DisServices).Status -eq 'Stopped') {
-                Write-Host $Disname "is Disabled" -ForegroundColor green 
-            } else {
-                Write-Host $Disname "is Enabled" -ForegroundColor red 
-        }
-}
-
+<#
+      $DisServices = @(
+          'BTAGService', 'bthserv', 'Browser', 'MapsBroker', 'lfsvc', 'lltdsvc', 
+          'MSiSCSI', 'PNRPsvc', 'p2psvc', 'PNRPAutoReg', 'wercplsupport', 'RasAuto', 
+          'SessionEnv', 'TermService', 'UmRdpService', 'RpcLocator', 'RemoteRegistry', 
+          'RemoteAccess', 'LanmanServer', 'SSDPSRV', 'upnphost', 'WerSvc', 'Wecsvc', 
+          'WMPNetworkSvc', 'icssvc', 'WpnService', 'PushToInstall', 'WinRM', 
+          'XboxGipSvc', 'XblAuthManager', 'XblGameSave', 'XboxNetApiSvc'
+      )
+          foreach ($DisService in $DisServices) {
+              $Disname = (Get-Service $DisService).Displayname
+              if ((Get-Service $DisServices).Status -eq 'Stopped') {
+                  Write-Output $Disname "is Disabled" -ForegroundColor green 
+              } else {
+                  Write-Host $Disname "is Enabled" -ForegroundColor red 
+          }
+  }
+ #> 
 #Get all running Processes and their Ports
 <#
 $obj=@()
