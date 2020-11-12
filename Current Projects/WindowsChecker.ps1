@@ -8,7 +8,7 @@
 
 
 #Disabled Services
-<#
+
       $DisServices = @(
           'BTAGService', 'bthserv', 'Browser', 'MapsBroker', 'lfsvc', 'lltdsvc', 
           'MSiSCSI', 'PNRPsvc', 'p2psvc', 'PNRPAutoReg', 'wercplsupport', 'RasAuto', 
@@ -25,7 +25,7 @@
                   Write-Host $Disname "is Enabled" -ForegroundColor red 
           }
   }
- #> 
+  
 #Get all running Processes and their Ports
 <#
 $obj=@()
