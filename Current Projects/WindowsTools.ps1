@@ -1,6 +1,11 @@
 #Main WINTOOL Script
+#Requires -RunAsAdministrator
 Function WINTOOLScript{
-    function WINTOOL1 {
+  function WINTOOL1 {
+    Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online
+
+  }
+    function WINTOOL2 {
       Add-Type -AssemblyName System.Windows.Forms
       [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -25,7 +30,7 @@ Function WINTOOLScript{
 
       [void]$Form.ShowDialog()
   }
-  function WINTOOL2 {
+  function WINTOOL3 {
       Add-Type -AssemblyName System.Windows.Forms
       [System.Windows.Forms.Application]::EnableVisualStyles()
       
@@ -68,7 +73,7 @@ Function WINTOOLScript{
       $WINTOOLButton2.Add_Click({  })
       $WINTOOLButton3.Add_Click({  })
   }
-  function WINTOOL3 {
+  function WINTOOL4 {
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -135,7 +140,7 @@ Function WINTOOLScript{
 
     [void]$Form.ShowDialog()
 }
-function WINTOOL4 {
+function WINTOOL5 {
   Add-Type -AssemblyName System.Windows.Forms
   [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -242,7 +247,7 @@ function WINTOOL4 {
 
 }
 #Admin Tools
-  function WINTOOL5 {
+  function WINTOOL6 {
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.Application]::EnableVisualStyles()
     
@@ -489,14 +494,14 @@ Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $Form                                   = New-Object system.Windows.Forms.Form
-$Form.ClientSize                        = New-Object System.Drawing.Point(145,225)
+$Form.ClientSize                        = New-Object System.Drawing.Point(145,260)
 $Form.FormBorderStyle                   = 'Fixed3D'
 $Form.MaximizeBox                       = $false
 $Form.text                              = "WINTOOL"
 $Form.TopMost                           = $false
 
 $WINTOOLButton1                         = New-Object system.Windows.Forms.Button
-$WINTOOLButton1.text                    = "1"
+$WINTOOLButton1.text                    = "Download Addons"
 $WINTOOLButton1.width                   = 105
 $WINTOOLButton1.height                  = 35
 $WINTOOLButton1.Enabled                 = $true
@@ -528,15 +533,23 @@ $WINTOOLButton4.location                = New-Object System.Drawing.Point(20,135
 $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
-$WINTOOLButton5.text                    = "Admin Tools"
+$WINTOOLButton5.text                    = "5"
 $WINTOOLButton5.width                   = 105
 $WINTOOLButton5.height                  = 35
 $WINTOOLButton5.Enabled                 = $true
 $WINTOOLButton5.location                = New-Object System.Drawing.Point(20,175)
 $WINTOOLButton5.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
+$WINTOOLButton6                         = New-Object system.Windows.Forms.Button
+$WINTOOLButton6.text                    = "Admin Tools"
+$WINTOOLButton6.width                   = 105
+$WINTOOLButton6.height                  = 35
+$WINTOOLButton6.Enabled                 = $true
+$WINTOOLButton6.location                = New-Object System.Drawing.Point(20,215)
+$WINTOOLButton6.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-$Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLButton3,$WINTOOLButton4,$WINTOOLButton5))
+
+$Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLButton3,$WINTOOLButton4,$WINTOOLButton5,$WINTOOLButton6))
 
 
 $WINTOOLButton1.Add_Click({ WINTOOL1 })
@@ -548,6 +561,8 @@ $WINTOOLButton3.Add_Click({ WINTOOL3 })
 $WINTOOLButton4.Add_Click({ WINTOOL4 })
 
 $WINTOOLButton5.Add_Click({ WINTOOL5 })
+
+$WINTOOLButton6.Add_Click({ WINTOOL6 })
 
 [void]$Form.ShowDialog()
   }
