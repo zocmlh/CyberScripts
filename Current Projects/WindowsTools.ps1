@@ -1,4 +1,6 @@
 #Main WINTOOL Script
+
+#Ask for admin perms 
 Start-Process powershell.exe -Verb runAs -WindowStyle Hidden
 Function WINTOOLScript{
   function WINTOOL1 {
