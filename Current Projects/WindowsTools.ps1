@@ -1,7 +1,5 @@
 #Main WINTOOL Script
 Function WINTOOLScript{
-    
- 
     function WINTOOL1 {
       Add-Type -AssemblyName System.Windows.Forms
       [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -243,6 +241,7 @@ function WINTOOL4 {
   $WINTOOLButton9.Add_Click({  })
 
 }
+#Admin Tools
   function WINTOOL5 {
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.Application]::EnableVisualStyles()
