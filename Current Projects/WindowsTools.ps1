@@ -1,9 +1,11 @@
 #Main WINTOOL Script
 
+
 #Ask for admin perms 
 Start-Process powershell.exe -Verb runAs -WindowStyle Hidden
 Function WINTOOLScript{
   function WINTOOL1 {
+    #Download essental programs
     Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online
     Start-Process https://git-scm.co
   }
@@ -26,9 +28,49 @@ Function WINTOOLScript{
       $WINTOOLButton1.location                = New-Object System.Drawing.Point(20,15)
       $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-      $Form.controls.AddRange(@($WINTOOLButton1))
+      $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
+      $WINTOOLButton2.text                    = "2"
+      $WINTOOLButton2.width                   = 105
+      $WINTOOLButton2.height                  = 35
+      $WINTOOLButton2.Enabled                 = $true
+      $WINTOOLButton2.location                = New-Object System.Drawing.Point(20,15)
+      $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-      $WINTOOLButton1.Add_Click({ })
+      $WINTOOLButton3                         = New-Object system.Windows.Forms.Button
+      $WINTOOLButton3.text                    = "3"
+      $WINTOOLButton3.width                   = 105
+      $WINTOOLButton3.height                  = 35
+      $WINTOOLButton3.Enabled                 = $true
+      $WINTOOLButton3.location                = New-Object System.Drawing.Point(20,15)
+      $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+      $WINTOOLButton4                         = New-Object system.Windows.Forms.Button
+      $WINTOOLButton4.text                    = "4"
+      $WINTOOLButton4.width                   = 105
+      $WINTOOLButton4.height                  = 35
+      $WINTOOLButton4.Enabled                 = $true
+      $WINTOOLButton4.location                = New-Object System.Drawing.Point(20,15)
+      $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+      $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
+      $WINTOOLButton5.text                    = "5"
+      $WINTOOLButton5.width                   = 105
+      $WINTOOLButton5.height                  = 35
+      $WINTOOLButton5.Enabled                 = $true
+      $WINTOOLButton5.location                = New-Object System.Drawing.Point(20,15)
+      $WINTOOLButton5.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+      $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLButton3,$WINTOOLButton4,$WINTOOLButton5))
+
+      $WINTOOLButton1.Add_Click({  })
+
+      $WINTOOLButton2.Add_Click({  })
+
+      $WINTOOLButton3.Add_Click({  })
+
+      $WINTOOLButton4.Add_Click({  })
+
+      $WINTOOLButton5.Add_Click({  })
 
       [void]$Form.ShowDialog()
   }
@@ -503,7 +545,7 @@ $Form.text                              = "WINTOOL"
 $Form.TopMost                           = $false
 
 $WINTOOLButton1                         = New-Object system.Windows.Forms.Button
-$WINTOOLButton1.text                    = "Download Addons"
+$WINTOOLButton1.text                    = "Download Essental"
 $WINTOOLButton1.width                   = 105
 $WINTOOLButton1.height                  = 35
 $WINTOOLButton1.Enabled                 = $true
@@ -511,7 +553,7 @@ $WINTOOLButton1.location                = New-Object System.Drawing.Point(20,15)
 $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
-$WINTOOLButton2.text                    = "2"
+$WINTOOLButton2.text                    = "Logs and Values"
 $WINTOOLButton2.width                   = 105
 $WINTOOLButton2.height                  = 35
 $WINTOOLButton2.Enabled                 = $true
