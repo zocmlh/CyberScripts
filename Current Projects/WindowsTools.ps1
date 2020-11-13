@@ -65,11 +65,17 @@ Function WINTOOLScript {
     $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLButton3,$WINTOOLButton4,$WINTOOLButton5))
 
 
-    $WINTOOLButton1.Add_Click({ Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online })
+    $WINTOOLButton1.Add_Click({ Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online 
+      PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
+    })
 
-    $WINTOOLButton2.Add_Click({ Start-Process https://git-scm.co })
+    $WINTOOLButton2.Add_Click({ Start-Process https://git-scm.co 
+      PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
+    })
 
-    $WINTOOLButton3.Add_Click({  })
+    $WINTOOLButton3.Add_Click({ git clone https://github.com/zocmlh/CyberSecurityTemplates.git 
+      PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
+    })
 
     $WINTOOLButton4.Add_Click({  })
 
@@ -137,6 +143,7 @@ Function WINTOOLScript {
         Get-NetTcpConnection | 
         Select-Object @{Name="Process";Expression={(Get-Process -Id $_.OwningProcess).ProcessName}},local*,remote*,state | 
         Sort-Object -Property Process | Out-File 'C:\Powershell Output\ProcessOutput.txt'
+        PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
        })
 
       $WINTOOLButton3.Add_Click({  })
@@ -663,7 +670,9 @@ function WINTOOL5 {
 
     $WINTOOLButton18.Add_Click({ Start-Process msconfig.exe  })
 
-    $WINTOOLButton19.Add_Click({ Start-Process msinfo32.exe })
+    $WINTOOLButton19.Add_Click({ Start-Process msinfo32.exe 
+      PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('reminder: buy milk')
+    })
 
     $WINTOOLButton20.Add_Click({ Start-Process taskschd.msc })
 
