@@ -9,61 +9,70 @@ If(!(test-path $path))
 #Ask for admin perms 
 Start-Process powershell.exe -Verb runAs -WindowStyle Hidden
 function WINTOOLScript {
-
-    #Disable firewall outbound port
-    function PortDisableOut {
+  #Disable firewall outbound port
+  function PortDisable {
       Add-Type -AssemblyName System.Windows.Forms
       Add-Type -AssemblyName System.Drawing
-
-      $form = New-Object System.Windows.Forms.Form
-      $form.Text = 'Data Entry Form'
-      $form.Size = New-Object System.Drawing.Size(300,200)
+      [System.Windows.Forms.Application]::EnableVisualStyles()
       
-      $form.StartPosition   = 'CenterScreen'
-
-      $okButton                        = New-Object System.Windows.Forms.Button
-      $okButton.Location               = New-Object System.Drawing.Point(75,120)
-      $okButton.Size                   = New-Object System.Drawing.Size(75,23)
-      $okButton.Text                   = 'OK'
-      $okButton.DialogResult           = [System.Windows.Forms.DialogResult]::OK
-      $form.AcceptButton               = $okButton
-
-      $cancelButton                   = New-Object System.Windows.Forms.Button
-      $cancelButton.Location          = New-Object System.Drawing.Point(150,120)
-      $cancelButton.Size              = New-Object System.Drawing.Size(75,23)
-      $cancelButton.Text              = 'Cancel'
-      $cancelButton.DialogResult      = [System.Windows.Forms.DialogResult]::Cancel
-      $form.CancelButton              = $cancelButton
-
-      $label                          = New-Object System.Windows.Forms.Label
-      $label.Location                 = New-Object System.Drawing.Point(10,20)
-      $label.Size                     = New-Object System.Drawing.Size(280,20)
-      $label.Text                     = 'Please enter the desired port to be disabled below'
-
-      $textBox                        = New-Object System.Windows.Forms.TextBox
-      $textBox.Location               = New-Object System.Drawing.Point(10,40)
-      $textBox.Size                   = New-Object System.Drawing.Size(260,20)
-
-      $checkbox1                      = new-object System.Windows.Forms.checkbox
-      $checkbox1.Location             = new-object System.Drawing.Size(30,30)
-      $checkbox1.Size                 = new-object System.Drawing.Size(250,50)
-      $checkbox1.Text                 = "Enable/Disable OK button"
-      $checkbox1.Checked              = $true
-
-      $form.Controls.AddRange(@($textBox,$label,$cancelButton,$okButton,$checkbox1))
-
-      $form.Topmost = $true
-
-      $form.Add_Shown({$textBox.Select()})
-      $result = $form.ShowDialog()
-
-      if ($result -eq [System.Windows.Forms.DialogResult]::OK)
-      {
-          $x = $textBox.Text
+      $Form                                   = New-Object System.Windows.Forms.Form
+      $Form.Text                              = 'Data Entry Form'
+      $Form.ClientSize                        = New-Object System.Drawing.Point(300,200)
+      $Form.minimumSize                       = New-Object System.Drawing.Size(300,200) 
+      $Form.maximumSize                       = New-Object System.Drawing.Size(300,200)
+      $Form.StartPosition                     = 'CenterScreen'
+      $Form.MaximizeBox                       = $false
+      
+      $WINTOOLLabel                           = New-Object System.Windows.Forms.Label
+      $WINTOOLLabel.Location                  = New-Object System.Drawing.Point(10,20)
+      $WINTOOLLabel.Size                      = New-Object System.Drawing.Size(280,20)
+      $WINTOOLLabel.Text                      = 'Please enter the desired port to be disabled below'
+      
+      $WINTOOLTextBox                         = New-Object System.Windows.Forms.TextBox
+      $WINTOOLTextBox.Location                = New-Object System.Drawing.Point(10,40)
+      $WINTOOLTextBox.Size                    = New-Object System.Drawing.Size(260,20)
+      
+      $WINTOOLCheckbox                        = New-Object System.Windows.Forms.checkbox
+      $WINTOOLCheckbox.Location               = New-Object System.Drawing.Size(30,50)
+      $WINTOOLCheckbox.Size                   = New-Object System.Drawing.Size(250,50)
+      $WINTOOLCheckbox.Text                   = "Outbounn Enabled/Inbound Disabled"
+      $WINTOOLCheckbox.Checked                = $true 
+      
+      $WINTOOLButton1                         = New-Object system.Windows.Forms.Button
+      $WINTOOLButton1.text                    = "OK"
+      $WINTOOLButton1.Size                    = New-Object System.Drawing.Size(75,25)
+      $WINTOOLButton1.Enabled                 = $true
+      $WINTOOLButton1.location                = New-Object System.Drawing.Point(75,100)
+      $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+      
+      $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
+      $WINTOOLButton2.text                    = "Cancel"
+      $WINTOOLButton2.Size                    = New-Object System.Drawing.Size(75,23)
+      $WINTOOLButton2.Enabled                 = $true
+      $WINTOOLButton2.location                = New-Object System.Drawing.Point(150,100)
+      $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+      
+      
+      $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLLabel,$WINTOOLTextBox,$WINTOOLCheckbox))
+      
+      
+      $WINTOOLButton1.Add_Click({ 
+        if ($WINTOOLCheckbox.Checked) {
+          $x = $WINTOOLTextBox.Text
           New-NetFirewallRule -DisplayName "Disabling Port $x" -Direction Outbound -Profile any -Protocol tcp -RemotePort $x
-      }
-    }
-
+          PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
+        } else {
+          $x = $WINTOOLTextBox.Text
+          New-NetFirewallRule -DisplayName "Disabling Port $x" -Direction Inbound -Profile any -Protocol tcp -RemotePort $x
+          PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
+        }
+       })
+      
+      $WINTOOLButton2.Add_Click({ $Form.Close() })
+      
+      
+      [void]$Form.ShowDialog()
+  }
    function WINTOOL1 {
     #Download essental programs
     Add-Type -AssemblyName System.Windows.Forms
@@ -139,7 +148,7 @@ function WINTOOLScript {
     [void]$Form.ShowDialog()
   }
   #Logging tools
-    function WINTOOL2 {
+  function WINTOOL2 {
       Add-Type -AssemblyName System.Windows.Forms
       [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -208,7 +217,7 @@ function WINTOOLScript {
       $WINTOOLButton5.Add_Click({  })
 
       [void]$Form.ShowDialog()
-  }
+      }
   #Import GPO policies +
   function WINTOOL3 {
     Add-Type -AssemblyName System.Windows.Forms
@@ -273,10 +282,10 @@ function WINTOOLScript {
 
     $WINTOOLButton4.Add_Click({  })
 
-    $WINTOOLButton5.Add_Click({ PortDisableOut })
+    $WINTOOLButton5.Add_Click({ PortDisable })
 
     [void]$Form.ShowDialog()
-  }
+    }
   function WINTOOL4 {
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -343,8 +352,8 @@ function WINTOOLScript {
     $WINTOOLButton5.Add_Click({  })
 
     [void]$Form.ShowDialog()
-}
-function WINTOOL5 {
+    }
+  function WINTOOL5 {
   Add-Type -AssemblyName System.Windows.Forms
   [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -449,7 +458,7 @@ function WINTOOL5 {
 
   $WINTOOLButton9.Add_Click({  })
 
-}
+    }
 #Admin Tools
   function WINTOOL6 {
     Add-Type -AssemblyName System.Windows.Forms
@@ -693,9 +702,9 @@ function WINTOOL5 {
     
     
     [void]$Form.ShowDialog()
-        }
+    }
 #Main GUI
-function MainWINTOOL {
+  function MainWINTOOL {
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -771,7 +780,7 @@ $WINTOOLButton5.Add_Click({ WINTOOL5 })
 $WINTOOLButton6.Add_Click({ WINTOOL6 })
 
 [void]$Form.ShowDialog()
-  }
+    }
 MainWINTOOL
 } 
 WINTOOLScript
