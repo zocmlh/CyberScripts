@@ -93,19 +93,19 @@ function WINTOOLScript {
       $out = @()
   
       # Get root tasks
-      $schedule.GetFolder($path).GetTasks(0) | % {
+      $schedule.GetFolder($path).GetTasks(0) | ForEach-Object {
           $xml = [xml]$_.xml
           $out += New-Object psobject -Property @{
               "Name" = $_.Name
               "Path" = $_.Path
               "LastRunTime" = $_.LastRunTime
               "NextRunTime" = $_.NextRunTime
-              "Actions" = ($xml.Task.Actions.Exec | % { "$($_.Command) $($_.Arguments)" }) -join "`n"
+              "Actions" = ($xml.Task.Actions.Exec | ForEach-Object { "$($_.Command) $($_.Arguments)" }) -join "`n"
           }
       }
   
       # Get tasks from subfolders
-      $schedule.GetFolder($path).GetFolders(0) | % {
+      $schedule.GetFolder($path).GetFolders(0) | ForEach-Object {
           $out += getTasks($_.Path)
       }
   
@@ -267,8 +267,8 @@ function WINTOOLScript {
     
     $WINTOOLButton2.Add_Click({ $Form.Close() })
     
-    
     [void]$Form.ShowDialog()
+
       }
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.Application]::EnableVisualStyles()
