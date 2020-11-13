@@ -47,7 +47,7 @@ function WINTOOLScript {
     $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $WINTOOLButton4                         = New-Object system.Windows.Forms.Button
-    $WINTOOLButton4.text                    = "4"
+    $WINTOOLButton4.text                    = "Security Essentals"
     $WINTOOLButton4.width                   = 105
     $WINTOOLButton4.height                  = 35
     $WINTOOLButton4.Enabled                 = $true
@@ -70,7 +70,7 @@ function WINTOOLScript {
       PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
     })
 
-    $WINTOOLButton2.Add_Click({ Start-Process https://git-scm.co 
+    $WINTOOLButton2.Add_Click({ Start-Process https://git-scm.com/download/win
       PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
     })
 
@@ -78,7 +78,9 @@ function WINTOOLScript {
       PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
     })
 
-    $WINTOOLButton4.Add_Click({  })
+    $WINTOOLButton4.Add_Click({ Start-Process https://www.microsoft.com/en-us/download/confirmation.aspx?id=5201
+      PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
+     })
 
     $WINTOOLButton5.Add_Click({  })
 
