@@ -66,7 +66,7 @@ function WINTOOLScript {
     $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLButton3,$WINTOOLButton4,$WINTOOLButton5))
 
 
-    $WINTOOLButton1.Add_Click({ Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online 
+    $WINTOOLButton1.Add_Click({ Invoke-Expression 'cmd /c start powershell -Command { Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online }'
       PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
     })
 
@@ -82,7 +82,10 @@ function WINTOOLScript {
       PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
      })
 
-    $WINTOOLButton5.Add_Click({  })
+    $WINTOOLButton5.Add_Click({ 
+      Update-MpSignature
+
+     })
 
     [void]$Form.ShowDialog()
   }
@@ -272,6 +275,7 @@ function WINTOOLScript {
     [void]$Form.ShowDialog()
 
       }
+
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -784,7 +788,7 @@ $WINTOOLButton2.location                = New-Object System.Drawing.Point(20,55)
 $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $WINTOOLButton3                         = New-Object system.Windows.Forms.Button
-$WINTOOLButton3.text                    = "3"
+$WINTOOLButton3.text                    = "Modify Windows Settings"
 $WINTOOLButton3.width                   = 105
 $WINTOOLButton3.height                  = 35
 $WINTOOLButton3.Enabled                 = $true
