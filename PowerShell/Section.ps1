@@ -21,7 +21,7 @@ net accounts /lockoutwindow:10
 auditpol.exe /set /category:* /success:enable | out-null
 auditpol.exe /set /category:* /failure:enable | out-null
 
-sc config eventlog start= auto
+Set-Content config eventlog start= auto
 
 
 #Disabling Services 
