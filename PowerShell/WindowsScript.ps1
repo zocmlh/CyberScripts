@@ -8,7 +8,7 @@ Start-Sleep 2
 echo "=======================================================================================================
  
                           C R E A T E D  F O R  P O W E R S H E L L                        
-                                     B Y  T Y L E R 
+ 
                                                            
 ======================================================================================================="
 Start-Sleep 5 
@@ -33,7 +33,7 @@ net accounts /lockoutthreshold:5
 net accounts /lockoutwindow:10
 
 #Event Logging
-sc config eventlog start= auto
+Set-Content config eventlog start = auto
 
 #Firewall
 reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "DisableCAD" /t REG_DWORD /d 0 /f
@@ -109,10 +109,11 @@ wmic UserAccount set Lockout=False | out-null
 pause
 
 #Check intalled programs
-Function Check-InstalledSoftware ($display_name) {
+Function CheckInstalledSoftware ($display_name) {
     Return Get-ItemProperty $registry_paths -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -like $display_name }
 } # function
-  
+CheckInstalledSoftware 
+
 #Programs
 do {
 $DeleteProg = Read-Host -Prompt "Should a program be deleted? Y/N"
@@ -130,15 +131,12 @@ $AutoUpdate = (New-Object -com "Microsoft.Update.AutoUpdate").Settings
 $AutoUpdate.NotificationLevel = 4
 $AutoUpdate.Save()
 
-#Disable remote desktop
-Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 1 | out-null
-
 #Auditing
 auditpol.exe /set /category:* /success:enable | out-null
 auditpol.exe /set /category:* /failure:enable | out-null
 
 #Disabling Services 
-$BadService = @("tapisrv","bthserv","mcx2svc","remoteregistry","seclogon","telnet","tlntsvr","p2pimsvc","simptcp","fax","msftpsvc","cscservice","fax","msftpsvc","webclient","W3SVC","IIS","Smtpsvc","Nntpsvc","Iisadmin","Msftpsvc",	)
+$BadService = @("tapisrv","bthserv","mcx2svc","remoteregistry","seclogon","telnet","tlntsvr","p2pimsvc","simptcp","fax","msftpsvc","cscservice","fax","msftpsvc","webclient","W3SVC","IIS","Smtpsvc","Nntpsvc","Iisadmin","Msftpsvc")
 foreach($BadService in $BadService){
 Stop-Service $BadService -Force -ErrorAction SilentlyContinue | out-null
 Set-Service $BadService -StartupType Disabled -ErrorAction SilentlyContinue | out-null}
