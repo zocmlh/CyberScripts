@@ -66,7 +66,7 @@ function WINTOOLScript {
     $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLButton3,$WINTOOLButton4,$WINTOOLButton5))
 
 
-    $WINTOOLButton1.Add_Click({ Invoke-Expression 'cmd /c start powershell -Command { Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online }'
+    $WINTOOLButton1.Add_Click({ Invoke-Expression 'Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online'
       PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
     })
     
@@ -274,6 +274,46 @@ function WINTOOLScript {
     [void]$Form.ShowDialog()
 
       }
+      #Apply GPO
+      function ApplyGPO {
+        Add-Type -AssemblyName System.Windows.Forms
+        [System.Windows.Forms.Application]::EnableVisualStyles()
+    
+        $Form                                   = New-Object system.Windows.Forms.Form
+        $Form.ClientSize                        = New-Object System.Drawing.Point(145,230)
+        $Form.FormBorderStyle                   = 'Fixed3D'
+        $Form.MaximizeBox                       = $false
+        $Form.text                              = "WINTOOL"
+        $Form.TopMost                           = $false
+    
+        $WINTOOLButton1                         = New-Object system.Windows.Forms.Button
+        $WINTOOLButton1.text                    = "Local Security Policy"
+        $WINTOOLButton1.width                   = 105
+        $WINTOOLButton1.height                  = 35
+        $WINTOOLButton1.Enabled                 = $true
+        $WINTOOLButton1.location                = New-Object System.Drawing.Point(20,15)
+        $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+    
+        $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
+        $WINTOOLButton2.text                    = "Firewall"
+        $WINTOOLButton2.width                   = 105
+        $WINTOOLButton2.height                  = 35
+        $WINTOOLButton2.Enabled                 = $true
+        $WINTOOLButton2.location                = New-Object System.Drawing.Point(20,55)
+        $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+        $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2))
+
+        $WINTOOLButton1.Add_Click({ Start-Process secpol.msc 
+          PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Import SecuritySettingsTemplateNoRemote.inf')
+        })
+
+        $WINTOOLButton2.Add_Click({ Start-Process WF.msc 
+          PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Import FirewallPolicy.wfw')
+        })
+
+        [void]$Form.ShowDialog()
+      }
 
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -310,7 +350,7 @@ function WINTOOLScript {
     $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $WINTOOLButton4                         = New-Object system.Windows.Forms.Button
-    $WINTOOLButton4.text                    = "4"
+    $WINTOOLButton4.text                    = "Import GPO"
     $WINTOOLButton4.width                   = 105
     $WINTOOLButton4.height                  = 35
     $WINTOOLButton4.Enabled                 = $true
@@ -335,7 +375,7 @@ function WINTOOLScript {
 
     $WINTOOLButton3.Add_Click({  })
 
-    $WINTOOLButton4.Add_Click({  })
+    $WINTOOLButton4.Add_Click({ ApplyGPO })
 
     $WINTOOLButton5.Add_Click({ PortDisable })
 
@@ -721,7 +761,9 @@ function WINTOOLScript {
     
     $WINTOOLButton6.Add_Click({ Start-Process eventvwr.msc })
     
-    $WINTOOLButton7.Add_Click({ Start-Process gpmc.msc })
+    $WINTOOLButton7.Add_Click({ Start-Process gpmc.msc 
+      PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('reminder: buy milk')
+    })
     
     $WINTOOLButton8.Add_Click({ Start-Process iscsicpl.exe })
     
@@ -745,9 +787,7 @@ function WINTOOLScript {
 
     $WINTOOLButton18.Add_Click({ Start-Process msconfig.exe  })
 
-    $WINTOOLButton19.Add_Click({ Start-Process msinfo32.exe 
-      PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('reminder: buy milk')
-    })
+    $WINTOOLButton19.Add_Click({ Start-Process msinfo32.exe })
 
     $WINTOOLButton20.Add_Click({ Start-Process taskschd.msc })
 
@@ -795,7 +835,7 @@ $WINTOOLButton3.location                = New-Object System.Drawing.Point(20,95)
 $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $WINTOOLButton4                         = New-Object system.Windows.Forms.Button
-$WINTOOLButton4.text                    = "4"
+$WINTOOLButton4.text                    = "TBD"
 $WINTOOLButton4.width                   = 105
 $WINTOOLButton4.height                  = 35
 $WINTOOLButton4.Enabled                 = $true
@@ -803,7 +843,7 @@ $WINTOOLButton4.location                = New-Object System.Drawing.Point(20,135
 $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
-$WINTOOLButton5.text                    = "5"
+$WINTOOLButton5.text                    = "TBD"
 $WINTOOLButton5.width                   = 105
 $WINTOOLButton5.height                  = 35
 $WINTOOLButton5.Enabled                 = $true
@@ -828,9 +868,9 @@ $WINTOOLButton2.Add_Click({ WINTOOL2 })
 
 $WINTOOLButton3.Add_Click({ WINTOOL3 })
 
-$WINTOOLButton4.Add_Click({ WINTOOL4 })
+#$WINTOOLButton4.Add_Click({ WINTOOL4 })
 
-$WINTOOLButton5.Add_Click({ WINTOOL5 })
+#$WINTOOLButton5.Add_Click({ WINTOOL5 })
 
 $WINTOOLButton6.Add_Click({ WINTOOL6 })
 
