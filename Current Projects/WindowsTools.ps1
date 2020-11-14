@@ -84,7 +84,6 @@ function WINTOOLScript {
 
     $WINTOOLButton5.Add_Click({ 
       Update-MpSignature
-
      })
 
     [void]$Form.ShowDialog()
