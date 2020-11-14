@@ -69,7 +69,7 @@ function WINTOOLScript {
     $WINTOOLButton1.Add_Click({ Invoke-Expression 'cmd /c start powershell -Command { Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online }'
       PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
     })
-
+    
     $WINTOOLButton2.Add_Click({ Start-Process https://git-scm.com/download/win
       PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
     })
