@@ -425,7 +425,7 @@ function WINTOOLScript {
     $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
-    $WINTOOLButton5.text                    = "5"
+    $WINTOOLButton5.text                    = "Change All Pass"
     $WINTOOLButton5.width                   = 105
     $WINTOOLButton5.height                  = 35
     $WINTOOLButton5.Enabled                 = $true
@@ -857,7 +857,7 @@ $WINTOOLButton3.location                = New-Object System.Drawing.Point(20,95)
 $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $WINTOOLButton4                         = New-Object system.Windows.Forms.Button
-$WINTOOLButton4.text                    = "TBD"
+$WINTOOLButton4.text                    = "RandomStuff"
 $WINTOOLButton4.width                   = 105
 $WINTOOLButton4.height                  = 35
 $WINTOOLButton4.Enabled                 = $true
@@ -865,7 +865,7 @@ $WINTOOLButton4.location                = New-Object System.Drawing.Point(20,135
 $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
-$WINTOOLButton5.text                    = "RandomStuff"
+$WINTOOLButton5.text                    = "TBD"
 $WINTOOLButton5.width                   = 105
 $WINTOOLButton5.height                  = 35
 $WINTOOLButton5.Enabled                 = $true
