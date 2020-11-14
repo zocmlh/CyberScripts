@@ -393,7 +393,7 @@ function WINTOOLScript {
     $Form.TopMost                           = $false
 
     $WINTOOLButton1                         = New-Object system.Windows.Forms.Button
-    $WINTOOLButton1.text                    = "1"
+    $WINTOOLButton1.text                    = "Disable Admin Guest"
     $WINTOOLButton1.width                   = 105
     $WINTOOLButton1.height                  = 35
     $WINTOOLButton1.Enabled                 = $true
@@ -401,7 +401,7 @@ function WINTOOLScript {
     $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
-    $WINTOOLButton2.text                    = "2"
+    $WINTOOLButton2.text                    = "DND Last Username"
     $WINTOOLButton2.width                   = 105
     $WINTOOLButton2.height                  = 35
     $WINTOOLButton2.Enabled                 = $true
@@ -409,7 +409,7 @@ function WINTOOLScript {
     $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $WINTOOLButton3                         = New-Object system.Windows.Forms.Button
-    $WINTOOLButton3.text                    = "3"
+    $WINTOOLButton3.text                    = "AutoUpdate On"
     $WINTOOLButton3.width                   = 105
     $WINTOOLButton3.height                  = 35
     $WINTOOLButton3.Enabled                 = $true
@@ -417,7 +417,7 @@ function WINTOOLScript {
     $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $WINTOOLButton4                         = New-Object system.Windows.Forms.Button
-    $WINTOOLButton4.text                    = "4"
+    $WINTOOLButton4.text                    = "Check Installed Programs"
     $WINTOOLButton4.width                   = 105
     $WINTOOLButton4.height                  = 35
     $WINTOOLButton4.Enabled                 = $true
@@ -436,15 +436,37 @@ function WINTOOLScript {
     $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLButton3,$WINTOOLButton4,$WINTOOLButton5))
 
 
-    $WINTOOLButton1.Add_Click({  })
+    $WINTOOLButton1.Add_Click({ 
+      net user administrator /active:no 
+      net user guest /active:no
+     })
 
-    $WINTOOLButton2.Add_Click({  })
+    $WINTOOLButton2.Add_Click({ 
+      reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "DisableCAD" /t REG_DWORD /d 1 /f
+     })
 
-    $WINTOOLButton3.Add_Click({  })
+    $WINTOOLButton3.Add_Click({ 
+      $AutoUpdate = (New-Object -com "Microsoft.Update.AutoUpdate").Settings
+      $AutoUpdate.NotificationLevel = 4
+      $AutoUpdate.Save()
+      PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
+     })
 
-    $WINTOOLButton4.Add_Click({  })
+    $WINTOOLButton4.Add_Click({ 
+      Get-WmiObject -Class Win32_Product | Out-File 'C:\Powershell Output\InstalledPrograms.txt'
+      PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
+     })
 
-    $WINTOOLButton5.Add_Click({  })
+    $WINTOOLButton5.Add_Click({ 
+      $password = Get-WmiObject -class win32_useraccount -filter "LocalAccount='True'"
+      foreach ($password in $password) {
+        net user $password.Name N0tTheDroidsYouAreLookingFor  /passwordreq:yes /logonpasswordchg:yes | out-null
+        PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed') 
+      }
+      wmic UserAccount set PasswordExpires=True | out-null
+      wmic UserAccount set Lockout=False | out-null
+      PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
+     })
 
     [void]$Form.ShowDialog()
     }
@@ -843,7 +865,7 @@ $WINTOOLButton4.location                = New-Object System.Drawing.Point(20,135
 $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
-$WINTOOLButton5.text                    = "TBD"
+$WINTOOLButton5.text                    = "RandomStuff"
 $WINTOOLButton5.width                   = 105
 $WINTOOLButton5.height                  = 35
 $WINTOOLButton5.Enabled                 = $true
@@ -868,9 +890,9 @@ $WINTOOLButton2.Add_Click({ WINTOOL2 })
 
 $WINTOOLButton3.Add_Click({ WINTOOL3 })
 
-#$WINTOOLButton4.Add_Click({ WINTOOL4 })
+$WINTOOLButton4.Add_Click({ WINTOOL4 })
 
-#$WINTOOLButton5.Add_Click({ WINTOOL5 })
+$WINTOOLButton5.Add_Click({ WINTOOL5 })
 
 $WINTOOLButton6.Add_Click({ WINTOOL6 })
 
