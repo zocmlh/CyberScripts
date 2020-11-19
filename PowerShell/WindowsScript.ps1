@@ -45,7 +45,7 @@ NetSh Advfirewall set allprofiles state on
 
 #Remove Users
 pause
-echo "Continue only if you have completed the Forensic Questions" 
+Write-Output "Continue only if you have completed the Forensic Questions" 
 net user administrator /active:no 
 net user guest /active:no 
 
