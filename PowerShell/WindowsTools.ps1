@@ -157,7 +157,7 @@ function WINTOOLScript {
       $WINTOOLButton2.height                  = 35
       $WINTOOLButton2.Enabled                 = $true
       $WINTOOLButton2.location                = New-Object System.Drawing.Point(20,55)
-      $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+      $WINTOOLButton2.Font                    = New-Object System.Dr3awing.Font('Microsoft Sans Serif',10)
 
       $WINTOOLButton3                         = New-Object system.Windows.Forms.Button
       $WINTOOLButton3.text                    = "Scheduled Tasks"
