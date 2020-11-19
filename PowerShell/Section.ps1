@@ -25,7 +25,7 @@ Set-Content config eventlog start= auto
 
 
 #Disabling Services 
-$BadService = @("tapisrv","bthserv","mcx2svc","remoteregistry","seclogon","telnet","tlntsvr","p2pimsvc","simptcp","fax","msftpsvc","cscservice","fax","msftpsvc","webclient","W3SVC","IIS","Smtpsvc","Nntpsvc","Iisadmin","Msftpsvc",	)
+$BadService = @("tapisrv","bthserv","mcx2svc","remoteregistry","seclogon","telnet","tlntsvr","p2pimsvc","simptcp","fax","msftpsvc","cscservice","fax","msftpsvc","webclient","W3SVC","IIS","Smtpsvc","Nntpsvc","Iisadmin","Msftpsvc")
 foreach($BadService in $BadService){
 Stop-Service $BadService -Force -ErrorAction SilentlyContinue | out-null
 Set-Service $BadService -StartupType Disabled -ErrorAction SilentlyContinue | out-null}
