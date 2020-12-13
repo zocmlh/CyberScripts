@@ -6,8 +6,6 @@ If(!(test-path $path))
       New-Item -ItemType Directory -Force -Path $path
 }
 
-#Ask for admin perms 
-Start-Process powershell.exe -Verb runAs -WindowStyle Hidden
 function WINTOOLScript {
 
   #Download essental programs
@@ -55,7 +53,7 @@ function WINTOOLScript {
     $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
-    $WINTOOLButton5.text                    = "5"
+    $WINTOOLButton5.text                    = "Start Windows Updates"
     $WINTOOLButton5.width                   = 105
     $WINTOOLButton5.height                  = 35
     $WINTOOLButton5.Enabled                 = $true
@@ -83,7 +81,11 @@ function WINTOOLScript {
      })
 
     $WINTOOLButton5.Add_Click({ 
-      Update-MpSignature
+      # Install-Module PSWindowsUpdate
+      # Get-Command –module PSWindowsUpdate
+      # Add-WUServiceManager -ServiceID 7971f918-a847-4430-9279-4a52d1efe18d
+      # Get-WUInstall –MicrosoftUpdate –AcceptAll
+      # PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
      })
 
     [void]$Form.ShowDialog()
@@ -144,22 +146,22 @@ function WINTOOLScript {
       $Form.TopMost                           = $false
 
       $WINTOOLButton1                         = New-Object system.Windows.Forms.Button
-      $WINTOOLButton1.text                    = "Services"
+      $WINTOOLButton1.text                    = "Group Polices"
       $WINTOOLButton1.width                   = 105
       $WINTOOLButton1.height                  = 35
       $WINTOOLButton1.Enabled                 = $true
       $WINTOOLButton1.location                = New-Object System.Drawing.Point(20,15)
       $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-      $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
+      $WINTOOLButton2                         = New-Object System.Windows.Forms.Button
       $WINTOOLButton2.text                    = "Processes"
       $WINTOOLButton2.width                   = 105
       $WINTOOLButton2.height                  = 35
       $WINTOOLButton2.Enabled                 = $true
       $WINTOOLButton2.location                = New-Object System.Drawing.Point(20,55)
-      $WINTOOLButton2.Font                    = New-Object System.Dr3awing.Font('Microsoft Sans Serif',10)
+      $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-      $WINTOOLButton3                         = New-Object system.Windows.Forms.Button
+      $WINTOOLButton3                         = New-Object System.Windows.Forms.Button
       $WINTOOLButton3.text                    = "Scheduled Tasks"
       $WINTOOLButton3.width                   = 105
       $WINTOOLButton3.height                  = 35
@@ -167,7 +169,7 @@ function WINTOOLScript {
       $WINTOOLButton3.location                = New-Object System.Drawing.Point(20,95)
       $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-      $WINTOOLButton4                         = New-Object system.Windows.Forms.Button
+      $WINTOOLButton4                         = New-Object System.Windows.Forms.Button
       $WINTOOLButton4.text                    = "Firewall States"
       $WINTOOLButton4.width                   = 105
       $WINTOOLButton4.height                  = 35
@@ -175,7 +177,7 @@ function WINTOOLScript {
       $WINTOOLButton4.location                = New-Object System.Drawing.Point(20,135)
       $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-      $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
+      $WINTOOLButton5                         = New-Object System.Windows.Forms.Button
       $WINTOOLButton5.text                    = "Audit State"
       $WINTOOLButton5.width                   = 105
       $WINTOOLButton5.height                  = 35
@@ -185,7 +187,9 @@ function WINTOOLScript {
 
       $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLButton3,$WINTOOLButton4,$WINTOOLButton5))
 
-      $WINTOOLButton1.Add_Click({  })
+      $WINTOOLButton1.Add_Click({ gpresult /h 'C:\Powershell Output\GPOReport.html'
+
+       })
 
       $WINTOOLButton2.Add_Click({ 
         Get-NetTcpConnection | 
