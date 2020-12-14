@@ -385,7 +385,70 @@ function WINTOOLScript {
 
     [void]$Form.ShowDialog()
     }
+    #Random Stuff
   function WINTOOL4 {
+          #Get main account
+          function ChangePassword {
+            Add-Type -AssemblyName System.Windows.Forms
+            Add-Type -AssemblyName System.Drawing
+            [System.Windows.Forms.Application]::EnableVisualStyles()
+            
+            $Form                                   = New-Object System.Windows.Forms.Form
+            $Form.Text                              = 'Data Entry Form'
+            $Form.ClientSize                        = New-Object System.Drawing.Point(300,200)
+            $Form.minimumSize                       = New-Object System.Drawing.Size(300,200) 
+            $Form.maximumSize                       = New-Object System.Drawing.Size(300,200)
+            $Form.StartPosition                     = 'CenterScreen'
+            $Form.MaximizeBox                       = $false
+            
+            $WINTOOLLabel                           = New-Object System.Windows.Forms.Label
+            $WINTOOLLabel.Location                  = New-Object System.Drawing.Point(10,20)
+            $WINTOOLLabel.Size                      = New-Object System.Drawing.Size(280,20)
+            $WINTOOLLabel.Text                      = 'Please enter the main user account'
+            
+            $WINTOOLTextBox                         = New-Object System.Windows.Forms.TextBox
+            $WINTOOLTextBox.Location                = New-Object System.Drawing.Point(10,40)
+            $WINTOOLTextBox.Size                    = New-Object System.Drawing.Size(260,20)
+            
+            $WINTOOLButton1                         = New-Object system.Windows.Forms.Button
+            $WINTOOLButton1.text                    = "OK"
+            $WINTOOLButton1.Size                    = New-Object System.Drawing.Size(75,25)
+            $WINTOOLButton1.Enabled                 = $true
+            $WINTOOLButton1.location                = New-Object System.Drawing.Point(75,100)
+            $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+            
+            $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
+            $WINTOOLButton2.text                    = "Cancel"
+            $WINTOOLButton2.Size                    = New-Object System.Drawing.Size(75,23)
+            $WINTOOLButton2.Enabled                 = $true
+            $WINTOOLButton2.location                = New-Object System.Drawing.Point(150,100)
+            $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+            
+            
+            $Form.controls.AddRange(@($WINTOOLButton1,$WINTOOLButton2,$WINTOOLLabel,$WINTOOLTextBox,$WINTOOLCheckbox))
+            
+            
+            $WINTOOLButton1.Add_Click({ 
+              $UserAccount = $WINTOOLTextBox.Text
+              PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show($UserAccount)
+              # $password = Get-WmiObject -class win32_useraccount -filter '$UserAccount'
+              # foreach ($password in $password) {
+              #   net user $password.Name N0tTheDroidsYouAreLookingFor  /passwordreq:yes /logonpasswordchg:yes | out-null
+              #   PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show($password) 
+              # }
+              # wmic UserAccount set PasswordExpires=True | out-null
+              # wmic UserAccount set Lockout=False | out-null
+              # PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
+              $Form.Close()
+             })
+             
+            $WINTOOLButton2.Add_Click({ $Form.Close() })
+            
+            [void]$Form.ShowDialog()
+        
+              }
+
+
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -461,20 +524,134 @@ function WINTOOLScript {
       PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
      })
 
-    $WINTOOLButton5.Add_Click({ 
-      $password = Get-WmiObject -class win32_useraccount -filter "LocalAccount='True'"
-      foreach ($password in $password) {
-        net user $password.Name N0tTheDroidsYouAreLookingFor  /passwordreq:yes /logonpasswordchg:yes | out-null
-        PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed') 
-      }
-      wmic UserAccount set PasswordExpires=True | out-null
-      wmic UserAccount set Lockout=False | out-null
-      PowerShell -NoProfile -NonInteractive -Command [reflection.assembly]::loadwithpartialname(''); [system.Windows.Forms.MessageBox]::show('Task Completed')
+    $WINTOOLButton5.Add_Click({
+      ChangePassword
      })
 
     [void]$Form.ShowDialog()
     }
-  function WINTOOL5 {
+  #Registry 
+    function WINTOOL5 {
+      function autoupdate {
+        # Windows\WindowsUpdate
+        reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v DisableWindowsUpdateAccess /t REG_DWORD /d 0 /f
+        reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v ElevateNonAdmins /t REG_DWORD /d 0 /f
+        reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v AutoInstallMinorUpdates /t REG_DWORD /d 1 /f
+        reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v AUOptions /t REG_DWORD /d 4 /f
+        reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 0 /f
+
+        # CurrentVerison
+        reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update" /v AUOptions /t REG_DWORD /d 4 /f
+        reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\WindowsUpdate" /v DisableWindowsUpdateAccess /t REG_DWORD /d 0 /f
+        reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v NoWindowsUpdate /t REG_DWORD /d 0 /f
+
+        # Internet Communication
+        reg add "HKLM\SYSTEM\Internet Communication Management\Internet Communication" /v DisableWindowsUpdateAccess /t REG_DWORD /d 0 /f
+      }
+      function remotedesktop {
+        # Terminal Server
+        reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 1 /f
+        reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v AllowTSConnections /t REG_DWORD /d 0 /f
+        reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fAllowToGetHelp /t REG_DWORD /d 0 /f
+
+        # Terminal Services
+        reg add "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows NT\Terminal Services" /v "AllowSignedFiles" /t REG_DWORD /d 0 /f
+        reg add "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows NT\Terminal Services" /v "AllowUnsignedFiles" /t REG_DWORD /d 0 /f
+        reg add "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows NT\Terminal Services" /v "DisablePasswordSaving" /t REG_DWORD /d 1 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service\WinRS" /v "AllowRemoteShellAccess" /t REG_DWORD /d 0 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v "AllowSignedFiles" /t REG_DWORD /d 0 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v "AllowUnsignedFiles" /t REG_DWORD /d 0 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v "CreateEncryptedOnlyTickets" /t REG_DWORD /d 1 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v "DisablePasswordSaving" /t REG_DWORD /d 1 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v "fAllowToGetHelp" /t REG_DWORD /d 0 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v "fAllowUnsolicited" /t REG_DWORD /d 0 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v "fDenyTSConnections" /t REG_DWORD /d 1 /f
+        # Terminal Services Client
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\Client" /v "fEnableUsbBlockDeviceBySetupClass" /t REG_DWORD /d 1 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\Client" /v "fEnableUsbNoAckIsochWriteToDevice" /t REG_DWORD /d 80 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\Client" /v "fEnableUsbSelectDeviceByInterface" /t REG_DWORD /d 1 /f
+
+        # Standard Profile
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile\RemoteAdminSettings" /v "Enabled" /t REG_DWORD /d 0 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile\Services\RemoteDesktop" /v "Enabled" /t REG_DWORD /d 0 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile\Services\UPnPFramework" /v "Enabled" /t REG_DWORD /d 0 /f
+
+        # Confrencing
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Conferencing" /v "NoRDS" /t REG_DWORD /d 1 /f
+      }
+      function uac {
+        # enable uac
+        reg ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLUA /t REG_DWORD /d 1 /f
+
+        # set uac high
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 5
+
+        #uac prompt
+	      Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 1
+        reg ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v PromptOnSecureDesktop /t REG_DWORD /d 1 /f
+
+
+
+      }
+      function websites {
+        #do not let sites track you
+        reg ADD "HKCU\Software\Microsoft\Internet Explorer\Main" /v DoNotTrack /t REG_DWORD /d 1 /f
+        reg ADD "HKCU\Software\Microsoft\Internet Explorer\Download" /v RunInvalidSignatures /t REG_DWORD /d 1 /f
+        reg ADD "HKCU\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_LOCALMACHINE_LOCKDOWN\Settings" /v LOCALMACHINE_CD_UNLOCK /t REG_DWORD /d 1 /f
+        reg ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v WarnonZoneCrossing /t REG_DWORD /d 1 /f
+
+        #warn if a site redirects you
+        reg ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v WarnOnPostRedirect /t REG_DWORD /d 1 /f
+
+        #warn if site certificate is bad 
+        reg ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v WarnonBadCertRecving /t REG_DWORD /d 1 /f
+
+        #
+      }
+      function windefender {
+        #start windows defender
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 0 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v ServiceKeepAlive /t REG_DWORD /d 1 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Scan" /v CheckForSignaturesBeforeRunningScan /t REG_DWORD /d 1 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Scan" /v DisableHeuristics /t REG_DWORD /d 0 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableIOAVProtection /t REG_DWORD /d 0 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableRealtimeMonitoring /t REG_DWORD /d 0 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v ScanWithAntiVirus /t REG_DWORD /d 3 /f
+      }
+      function generalRegistry {
+        #enable ctrl+alt+del
+        reg ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v DisableCAD /t REG_DWORD /d 0 /f
+
+        #no auto logon for administrators
+        reg ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_DWORD /d 0 /f
+
+        #idle time set to 15min
+        reg ADD "HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters" /v autodisconnect /t REG_DWORD /d 15 /f
+
+        #disable cd drive
+        reg ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AllocateCDRoms /t REG_DWORD /d 1 /f
+
+        #disable floppy drive
+        reg ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AllocateFloppies /t REG_DWORD /d 1 /f
+
+        #enable the local security authentication server
+        reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\LSASS.exe" /v AuditLevel /t REG_DWORD /d 00000008 /f
+
+        #show hidden files
+        reg ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowSuperHidden /t REG_DWORD /d 1 /f
+        reg ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 1 /f
+
+        #disable autorun files
+        reg ADD "HKCU\SYSTEM\CurrentControlSet\Services\CDROM" /v AutoRun /t REG_DWORD /d 1 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoAutorun" /t REG_DWORD /d 1 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoDriveTypeAutoRun" /t REG_DWORD /d 255 /f
+
+        #enable phishing filter
+        reg add "HKEY_CURRENT_USER\Software\Policies\Microsoft\Internet Explorer\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d 1 /f
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Internet Explorer\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d 1 /f
+
+      }
+
   Add-Type -AssemblyName System.Windows.Forms
   [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -486,7 +663,7 @@ function WINTOOLScript {
   $Form.TopMost                           = $false
 
   $WINTOOLButton1                         = New-Object system.Windows.Forms.Button
-  $WINTOOLButton1.text                    = "1"
+  $WINTOOLButton1.text                    = "AutoUpdate"
   $WINTOOLButton1.width                   = 105
   $WINTOOLButton1.height                  = 35
   $WINTOOLButton1.Enabled                 = $true
@@ -494,7 +671,7 @@ function WINTOOLScript {
   $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
   $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
-  $WINTOOLButton2.text                    = "2"
+  $WINTOOLButton2.text                    = "RemoteDesktop"
   $WINTOOLButton2.width                   = 105
   $WINTOOLButton2.height                  = 35
   $WINTOOLButton2.Enabled                 = $true
@@ -502,7 +679,7 @@ function WINTOOLScript {
   $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
   $WINTOOLButton3                         = New-Object system.Windows.Forms.Button
-  $WINTOOLButton3.text                    = "3"
+  $WINTOOLButton3.text                    = "UAC"
   $WINTOOLButton3.width                   = 105
   $WINTOOLButton3.height                  = 35
   $WINTOOLButton3.Enabled                 = $true
@@ -510,7 +687,7 @@ function WINTOOLScript {
   $WINTOOLButton3.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
   $WINTOOLButton4                         = New-Object system.Windows.Forms.Button
-  $WINTOOLButton4.text                    = "4"
+  $WINTOOLButton4.text                    = "Websites"
   $WINTOOLButton4.width                   = 105
   $WINTOOLButton4.height                  = 35
   $WINTOOLButton4.Enabled                 = $true
@@ -518,7 +695,7 @@ function WINTOOLScript {
   $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
   $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
-  $WINTOOLButton5.text                    = "5"
+  $WINTOOLButton5.text                    = "WinDefender"
   $WINTOOLButton5.width                   = 105
   $WINTOOLButton5.height                  = 35
   $WINTOOLButton5.Enabled                 = $true
@@ -526,7 +703,7 @@ function WINTOOLScript {
   $WINTOOLButton5.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
   $WINTOOLButton6                         = New-Object system.Windows.Forms.Button
-  $WINTOOLButton6.text                    = "6"
+  $WINTOOLButton6.text                    = "General"
   $WINTOOLButton6.width                   = 105
   $WINTOOLButton6.height                  = 35
   $WINTOOLButton6.Enabled                 = $true
@@ -561,17 +738,17 @@ function WINTOOLScript {
 
   [void]$Form.ShowDialog()
 
-  $WINTOOLButton1.Add_Click({  })
+  $WINTOOLButton1.Add_Click({ autoupdate })
 
-  $WINTOOLButton2.Add_Click({  })
+  $WINTOOLButton2.Add_Click({ remotedesktop })
 
-  $WINTOOLButton3.Add_Click({  })
+  $WINTOOLButton3.Add_Click({ uac })
 
-  $WINTOOLButton4.Add_Click({  })
+  $WINTOOLButton4.Add_Click({ websites })
 
-  $WINTOOLButton5.Add_Click({  })
+  $WINTOOLButton5.Add_Click({ windefender })
 
-  $WINTOOLButton6.Add_Click({  })
+  $WINTOOLButton6.Add_Click({ generalRegistry })
 
   $WINTOOLButton7.Add_Click({  })
 
@@ -869,7 +1046,7 @@ $WINTOOLButton4.location                = New-Object System.Drawing.Point(20,135
 $WINTOOLButton4.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $WINTOOLButton5                         = New-Object system.Windows.Forms.Button
-$WINTOOLButton5.text                    = "TBD"
+$WINTOOLButton5.text                    = "Registry"
 $WINTOOLButton5.width                   = 105
 $WINTOOLButton5.height                  = 35
 $WINTOOLButton5.Enabled                 = $true
