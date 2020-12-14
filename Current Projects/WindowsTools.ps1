@@ -212,7 +212,7 @@ function WINTOOLScript {
 
       [void]$Form.ShowDialog()
       }
-  #Import GPO policies + Disable Ports
+  #Import GPO policies + Disable Ports + Disable/Enable services + disable c: and user folder sharing
   function WINTOOL3 {
       #Disable firewall outbound port
       function PortDisable {
@@ -318,6 +318,91 @@ function WINTOOLScript {
 
         [void]$Form.ShowDialog()
       }
+      #disable services 
+      function disableservices{
+        cmd.exe /c 'sc stop tlntsvr'
+        cmd.exe /c 'sc config tlntsvr start= disabled'
+        cmd.exe /c 'sc stop msftpsvc'
+        cmd.exe /c 'sc config msftpsvc start= disabled'
+        cmd.exe /c 'sc stop snmptrap'
+        cmd.exe /c 'sc config snmptrap start= disabled'
+        cmd.exe /c 'sc stop ssdpsrv'
+        cmd.exe /c 'sc config ssdpsrv start= disabled'
+        cmd.exe /c 'sc stop termservice'
+        cmd.exe /c 'sc config termservice start= disabled'
+        cmd.exe /c 'sc stop sessionenv'
+        cmd.exe /c 'sc config sessionenv start= disabled'
+        cmd.exe /c 'sc stop remoteregistry'
+        cmd.exe /c 'sc config remoteregistry start= disabled'
+        cmd.exe /c 'sc stop RemoteAccess'
+        cmd.exe /c 'sc config RemoteAccess start= disabled'
+        cmd.exe /c 'sc stop mnmsrvc'
+        cmd.exe /c 'sc config mnmsrvc start= disabled'
+        cmd.exe /c 'sc stop NetTcpPortSharing'
+        cmd.exe /c 'sc config NetTcpPortSharing start= disabled'
+        cmd.exe /c 'sc stop XblAuthManager'
+        cmd.exe /c 'sc config XblAuthManager start= disabled'
+        cmd.exe /c 'sc stop XblGameSave'
+        cmd.exe /c 'sc config XblGameSave start= disabled'
+        cmd.exe /c 'sc stop XboxGipSvc'
+        cmd.exe /c 'sc config XboxGipSvc start= disabled'
+        cmd.exe /c 'sc stop xboxgip'
+        cmd.exe /c 'sc config xboxgip start= disabled'
+        cmd.exe /c 'sc stop xbgm'
+        cmd.exe /c 'sc config xbgm start= disabled'
+        cmd.exe /c 'sc stop simptcp'
+        cmd.exe /c 'sc config simptcp start= disabled'
+        cmd.exe /c 'sc stop fax'
+        cmd.exe /c 'sc config fax start= disabled'
+        cmd.exe /c 'sc stop Msftpsvc'
+        cmd.exe /c 'sc config Msftpsvc start= disabled'
+        cmd.exe /c 'sc stop iprip'
+        cmd.exe /c 'sc config iprip start= disabled'
+        cmd.exe /c 'sc stop ftpsvc'
+        cmd.exe /c 'sc config ftpsvc start= disabled'
+        cmd.exe /c 'sc config W3svc start= disabled'
+        cmd.exe /c 'sc stop Smtpsvc'
+        cmd.exe /c 'sc config Smtpsvc start= disabled'
+        cmd.exe /c 'sc stop Iisadmin'
+        cmd.exe /c 'sc config Iisadmin start= disabled'
+        cmd.exe /c 'sc stop IsmServ'
+        cmd.exe /c 'sc config IsmServ start= disabled'
+        cmd.exe /c 'sc stop WmdmPmSN'
+        cmd.exe /c 'sc config WmdmPmSN start= disabled'
+        cmd.exe /c 'sc stop helpsvc'
+        cmd.exe /c 'sc config helpsvc start= disabled'
+        cmd.exe /c 'sc stop Spooler'
+        cmd.exe /c 'sc config Spooler start= disabled'
+        cmd.exe /c 'sc stop lanmanserver'
+        cmd.exe /c 'sc config lanmanserver start= disabled'
+        cmd.exe /c 'sc stop Sacsvr'
+        cmd.exe /c 'sc config Sacsvr start= disabled'
+        cmd.exe /c 'sc stop nfssvc'
+        cmd.exe /c 'sc config nfssvc start= disabled'
+        cmd.exe /c 'sc stop nfsclnt'
+        cmd.exe /c 'sc config nfsclnt start= disabled'
+        cmd.exe /c 'sc stop lltdsvc'
+        cmd.exe /c 'sc config lltdsvc start= disabled'
+        cmd.exe /c 'sc stop iphlpsvc'
+        cmd.exe /c 'sc config iphlpsvc start= disabled'
+      }
+      #enableservies
+      function enableservices {
+        cmd.exe /c 'sc start wscsvc'
+        cmd.exe /c 'sc config wscsvc start= auto'
+        cmd.exe /c 'sc start EventLog'
+        cmd.exe /c 'sc config EventLog start= auto'
+        cmd.exe /c 'sc start MpsSvc'
+        cmd.exe /c 'sc config MpsSvc start= auto'
+        cmd.exe /c 'sc start WinDefend'
+        cmd.exe /c 'sc config WinDefend start= auto'
+        cmd.exe /c 'sc start WdNisSvc'
+        cmd.exe /c 'sc config WdNisSvc start= auto'
+        cmd.exe /c 'sc start Schedule'
+        cmd.exe /c 'sc config Schedule start= auto'
+      }
+      function sharing {
+      }
 
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -338,7 +423,7 @@ function WINTOOLScript {
     $WINTOOLButton1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $WINTOOLButton2                         = New-Object system.Windows.Forms.Button
-    $WINTOOLButton2.text                    = "2"
+    $WINTOOLButton2.text                    = "Disable Services"
     $WINTOOLButton2.width                   = 105
     $WINTOOLButton2.height                  = 35
     $WINTOOLButton2.Enabled                 = $true
@@ -346,7 +431,7 @@ function WINTOOLScript {
     $WINTOOLButton2.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
     $WINTOOLButton3                         = New-Object system.Windows.Forms.Button
-    $WINTOOLButton3.text                    = "3"
+    $WINTOOLButton3.text                    = "Enable Services"
     $WINTOOLButton3.width                   = 105
     $WINTOOLButton3.height                  = 35
     $WINTOOLButton3.Enabled                 = $true
